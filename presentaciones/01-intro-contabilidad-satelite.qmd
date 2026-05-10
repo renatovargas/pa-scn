@@ -1,0 +1,283 @@
+---
+title: "Introducción a la Contabilidad Satélite de Bioeconomía"
+author: "Renato Vargas (Consultor CEPAL), Andrés Mondaini (CEPAL),  Adrián Rodríguez (CEPAL)"
+format: 
+  revealjs:
+    theme: serif
+    footer: "Introducción a la Contabilidad Satélite de Bioeconomía"
+---
+
+## Los productos bioeconómicos representan en promedio en Latinoamérica {.smaller}
+
+::::::: columns
+:::: {.column width="50%"}
+::: incremental
+-   [17.5%]{style="color:purple;"} de la producción a precios básicos.
+-   [12.5%]{style="color:purple;"} de las importaciones.
+-   [24.5%]{style="color:purple;"} de los impuestos sobre los productos.
+:::
+::::
+
+:::: {.column width="50%"}
+::: incremental
+-   [8.6%]{style="color:purple;"} de los insumos de todas las industrias.
+-   [27.9%]{style="color:purple;"} de las exportaciones.
+-   [25.0%]{style="color:purple;"} del consumo final.
+-   [3.7%]{style="color:purple;"} de la formación bruta de capital.
+:::
+::::
+:::::::
+
+# Definiciones
+
+## Definiciones de Bioeconomía {.smaller}
+
+:::::: columns
+::: {.column width="30%"}
+![](images/paste-1.png)
+:::
+
+:::: {.column width="70%"}
+“La producción, utilización, conservación y regeneración de recursos biológicos, incluyendo los conocimientos, la ciencia, la tecnología y la innovación relacionados con dichos recursos, para proporcionar información, productos, procesos y servicios a todos los sectores económicos, con el propósito de avanzar hacia una economía sostenible.”
+
+::: {style="text-align: right"}
+---Gobierno de Costa Rica, 2020; <br> German Bioeconomy Council, 2018
+:::
+::::
+::::::
+
+## Definiciones de Bioeconomía {.smaller}
+
+::::::: columns
+::: {.column width="25%"}
+![](images/paste-46.png)
+:::
+
+::: {.column width="25%"}
+![](images/paste-47.png)
+:::
+
+:::: {.column width="50%"}
+"La bioeconomía es la producción de bienes y servicios que se basa en el uso sostenible de los recursos biológicos y sus derivados obtenidos a partir de procesos productivos, para promover la creación de empleo y contribuir a la disminución de la pobreza."
+
+::: {style="text-align: right"}
+---Libro Blanco de la Bioeconomía Sustentable de Ecuador.
+:::
+::::
+:::::::
+
+## ¿Qué debe entenderse por bioeconomía? {.smaller}
+
+::::::: columns
+:::: {.column width="50%"}
+::: incremental
+-   Biomasa que se cultiva para producir alimentos, forrajes, fibras y energía.
+-   Biomasa de los recursos marinos y acuicultura.
+-   Biomasa forestal.
+-   Biomasa residual en los sectores agropecuario, pesca y acuacultura, forestal y agroindustrial.
+:::
+::::
+
+:::: {.column width="50%"}
+::: incremental
+-   Biomasa que se puede recuperar de los desechos urbanos.
+-   Desechos líquidos de la ganadería y de la actividad humana.
+-   Biodiversidad terrestre y marina, incluyendo la biodiversidad de aguas continentales.
+:::
+::::
+:::::::
+
+##  {background-image="images/paste-2.png"}
+
+::: {style="color: white"}
+¿Satélite de qué?
+:::
+
+# Cuentas Nacionales y Cuentas Satélite
+
+## Cuentas Nacionales y Cuentas Satélite {.smaller}
+
+::::::: columns
+:::: {.column width="50%"}
+::: incremental
+[**Sistema de Cuentas Nacionales**]{style="color:teal;"}
+
+-   Desempeño económico
+-   La producción.
+-   El consumo.
+-   La distribución del ingreso.
+-   El beneficio anual de las actividades económicas.
+-   Tiene reglas estrictas contables, definiciones y clasificaciones.
+:::
+::::
+
+:::: {.column width="50%"}
+::: incremental
+[**Cuentas Satélite**]{style="color:teal;"}
+
+-   Extienden el alcance del Sistema de Cuentas Nacionales.
+-   Hacen un acercamiento y aislan un tema en particular para revelar su valor.
+-   Usan información complementaria pero compatible con el SCN (física por ejemplo).
+-   En algunos casos, modifican definiciones.
+:::
+::::
+:::::::
+
+## Cuadro de oferta
+
+![](images/paste-4.png)
+
+## Cuadro de utilización
+
+![](images/paste-5.png)
+
+## Valor Agregado y Cálculo PIB (método de la producción)
+
+![](images/paste-6.png)
+
+# Metodología y abordaje
+
+## Determinación del tipo de extension del Sistema de Cuentas Nacionales
+
+![](images/paste-11.png)
+
+## Abordaje de Cuentas de Sectores Clave
+
+![](images/paste-12.png)
+
+# Resultados
+
+## Cuadro de oferta bioeconómica de Ecuador (año 2019, millones de dólares)
+
+![](images/paste-41.png)
+
+## Cuadro de utilización bioeconómica de Ecuador (año 2019, millones de dólares)
+
+![](images/paste-42.png)
+
+# Cálculo del Valor Agregado
+
+## Valor Agregado (Método de Actividades Económicas)
+
+![](images/paste-43.png)
+
+## 
+
+![](images/paste-44.png)
+
+## Valor Agregado (Método del Consumo Intermedio)
+
+![](images/paste-45.png)
+
+## Cálculo de multiplicadores de uso de insumos bioeconómicos {.smaller}
+
+::: incremental
+-   Utilizando la matriz de insumo producto, se estiman multiplicadores de uso de insumos bioeconómicos que explican la cantidad de insumos bioeconómicos (en dólares) que se usan directa e indirectamente por cada dólar que una actividad económica hace llegar a la demanda final.
+-   Muestra la dependencia directa e indirecta de los productos bioeconómicos y bioeconómicos extendidos.
+-   Va más allá del sector primario.
+-   Luego se agrupan estas mediciones según la Desviación Absoluta Mediana (DAM).
+:::
+
+## Desviación Absoluta Mediana (DAM) {.smaller}
+
+Mide qué tan dispersos están los valores en torno a la mediana. Es una métrica robusta que no se ve afectada por valores extremos, a diferencia de la desviación estándar.
+
+::: incremental
+-   **1 MAD:** actividades que están ligeramente por encima de la mediana, pero todavía cercanas al valor central de los datos.
+-   **2 MADs:** Estas actividades son claramente superiores al promedio típico, ya que se alejan significativamente del núcleo central de los datos.
+-   **3 MADs:** Son observaciones fuera de lo normal positivas que contribuyen mucho más a el uso de insumos bioeconómicos.
+:::
+
+##
+
+![](images/paste-14.png)
+
+##
+
+![](images/paste-15.png)
+
+##
+
+![](images/paste-16.png)
+
+## Valor agregado por uso directo e indirecto de bioeconómicos
+
+![](images/paste-17.png)
+
+## 
+
+![](images/paste-18.png)
+
+## 
+
+![](images/paste-19.png)
+
+## 
+
+![](images/paste-20.png)
+
+## 
+
+![](images/paste-22.png)
+
+## 
+
+![](images/paste-23.png)
+
+# Resultados en el contexto latinoamericano
+
+## Publicaciones disponibles
+
+:::::: columns
+::: {.column width="33%"}
+![](images/paste-40.png)
+:::
+
+::: {.column width="33%"}
+![](images/paste-25.png)
+:::
+
+::: {.column width="33%"}
+![](images/paste-26.png)
+:::
+::::::
+
+## Producción (año 2018, porcentajes)
+
+![](images/paste-27.png)
+
+## Consumo intermedio (año 2018, porcentajes)
+
+![](images/paste-28.png)
+
+## Importaciones (año 2018, porcentajes)
+
+![](images/paste-29.png)
+
+## Exportaciones (año 2018, porcentajes)
+
+![](images/paste-30.png)
+
+## Impuestos netos de subvenciones (año 2018, porcentajes)
+
+![](images/paste-31.png)
+
+## Tasa impositiva implícita (año 2018, porcentajes)
+
+![](images/paste-36.png)
+
+## Consumo final (año 2018, porcentajes)
+
+![](images/paste-38.png)
+
+## Formación bruta de capital
+
+![](images/paste-39.png)
+
+## {.center}
+
+::: {style="text-align: center"}
+Gracias
+
+renatovargas.com
+:::

@@ -1,0 +1,137 @@
+---
+title: "Los cuadros de oferta y utilización"
+subtitle: "Sus componentes y particularidades"
+author: "Renato Vargas (Consultor CEPAL)"
+format: 
+  revealjs:
+    theme: serif
+    footer: "Los cuadros de oferta y utilización"
+---
+
+## La cuenta de producción
+
+::: {.incremental}
+- "La cuenta de producción es la primera de la sucesión de cuentas elaboradas para las unidades y los sectores institucionales que muestra cómo el ingreso se genera, distribuye y utiliza en la economía. 
+- Las actividades definidas como producción determinan la magnitud
+del PIB y el nivel de ingreso de la economía. 
+- En sentido estricto, la cuenta de producción para el total de la economía es la agregación de las cuentas de producción de cada unidad de producción." (p. 109)
+:::
+
+::: aside
+Naciones Unidas et al. (2008). Sistema de Cuentas Nacionales 2008, Nueva York.
+:::
+
+## ¿Qué es la producción?
+
+
+::: {.incremental}
+- "La producción es una actividad realizada bajo la responsabilidad, el control y la gestión de una unidad institucional, en la que se utilizan insumos de mano de obra, capital y bienes y servicios para obtener otros bienes y servicios.
+
+- El saldo contable de la cuenta de la producción es el
+valor agregado". (p.109)
+:::
+
+::: aside 
+Naciones Unidas et al. (2008). Sistema de Cuentas Nacionales 2008, Nueva York.
+:::
+
+## De precios básicos a precios de comprador
+
+:::::: columns
+:::{.incremental}
+::: {.column width="50%"}
+- Precios básicos
+- Impuestos sobre los productos excluido el IVA facturado (+)
+- Subvenciones a los productos (-)
+- **= Precios de productor**
+:::
+:::
+
+:::: {.column width="50%"}
+:::{.incremental}
+- IVA no deducible por el comprador (+)
+- Gastos de transporte facturados en forma separada (+)
+- Márgenes comerciales mayoristas y minoristas (+)
+- **= Precios de comprador**
+:::
+::::
+::::::
+
+## Equilibrios de productos 
+
+:::{.incremental}
+- Producción 
+- Importaciones (+)
+- =
+- Consumo intermedio 
+- Consumo final (+) 
+- Formación de capital (+) 
+- Exportaciones
+:::
+
+## ¿Qué papel desempeñan los cuadros de oferta y utilización?
+
+:::{.incremental}
+- Muestran la cuenta de producción para todos los sectores de la economía en un solo instrumento (o dos).
+- Muestran el equilibrio de productos para todos los bienes y servicios reconocidos por la institución encargada de su preparación en el país.
+:::
+
+## Los cuadros de oferta y utilización
+
+:::{.incremental}
+- Muestran información para actividades económicas.
+- Calculan el equilibrio de productos para bienes y servicios.
+- Muestran 3 cuadros básicos (oferta, utilización y valor agregado).
+
+:::
+
+## {.center}
+
+::: {style="text-align: center"}
+
+Descargar carpeta completa:
+
+**https://bit.ly/pa-scn**
+
+Abrir archivo ubicado en:
+
+**"data/cou/PAN_COU_Corr_2018_DE_REFERENCIA.xlsx"**
+:::
+
+## Preguntas {.smaller}
+
+Inspeccionamos el archivo **PAN_COU_Corr_2018_DE_REFERENCIA.xlsx** y respondemos:
+
+:::::: columns
+:::{.incremental}
+::: {.column width="75%"}
+1. ¿En la matriz de oferta nacional a precios básicos cuánto representan todos los productos de la actividad ["Enseñanza de Mercado"]{style="color:teal;"}?
+2. ¿En la oferta total a precios básicos, productor y usuario, cuánto es el margen de comercio del producto ["PRODUCTOS DE PANADERÍA"]{style="color:teal;"}?
+3. ¿Lo mismo pero del [producto número 4801]{style="color:teal;"}? ¿Hay algo peculiar?
+4. ¿Cuánto es la Utilización Total del producto ["MADERA EN BRUTO"]{style="color:teal;"}?
+5. ¿En la utilización final total a precios de usuario, cuánto representan las exportaciones de ["2101 CARNE Y DESPOJOS COMESTIBLES DE GANADO BOVINO"]{style="color:teal;"}?
+:::
+:::
+
+:::: {.column width="25%"}
+:::{.incremental}
+- **Respuestas**
+1. [911.1]{style="color:green;"} millones de B/.
+2. [94.9]{style="color:green;"} millones de B/.
+3. [-16,490.1]{style="color:red;"} millones de B/.
+4. [122.0]{style="color:green;"} millones de B/.
+5. [27.1]{style="color:green;"} millones de B/.
+
+:::
+::::
+::::::
+
+
+## {.center}
+
+::: {style="text-align: center"}
+Gracias
+
+renatovargas.com
+:::
+

@@ -1,0 +1,100 @@
+---
+title: "Código de Procesamiento"
+subtitle: "R y Positron"
+author: "Renato Vargas (Consultor CEPAL)"
+format: 
+  revealjs:
+    theme: serif
+    footer: "Código de Procesamiento"
+---
+
+## Importar los datos (cuadro entrada múltiple)
+
+```{.r code-line-numbers="|2|3|4-5"}
+datos1 <- read_excel(
+  archivo,
+  range = paste0("'", hoja, "'!", rango),
+  col_names = FALSE,
+  col_types = "numeric"
+)
+```
+## Crear correlativos de fila y columna estables
+
+```{.r code-line-numbers="|1-2|3-9|4|5|6|7|8|10-16"}
+n_filas <- nrow(datos1)
+n_columnas <- ncol(datos1)
+cod_filas <- sprintf(
+  "%s_%s_%s_f%04d",
+  iso3,
+  v_equivalencias,
+  codigo_cuadrante,
+  seq_len(n_filas)
+)
+cod_columnas <- sprintf(
+  "%s_%s_%s_c%04d",
+  iso3,
+  v_equivalencias,
+  codigo_cuadrante,
+  seq_len(n_columnas)
+)
+```
+
+## Reemplazar las celdas vacías con ceros y nombrar
+
+```{.r code-line-numbers="|2-7|3-6|8|9-13"}
+datos2 <- datos1 |>
+  mutate(
+    across(
+      everything(),
+      ~ replace_na(.x, 0)
+    )
+  ) |>
+  setNames(cod_columnas) |>
+  mutate(
+    Filas = cod_filas,
+    .before = 1
+  )
+```
+
+## Deshacernos de columnas y filas redundantes o vacías
+
+```{.r code-line-numbers="|1-3|5-7"}
+if (length(excluir_filas) > 0) {
+  datos3 <- datos2[-excluir_filas, , drop = FALSE]
+}
+
+if (length(excluir_columnas) > 0) {
+  datos3 <- datos3[, -excluir_columnas, drop = FALSE]
+}
+```
+
+## Alargar y agregar columnas informativas
+
+```{.r code-line-numbers="|2-6|7-17"}
+datos4 <- datos3 |>
+  pivot_longer(
+    cols = -Filas,
+    names_to = "Columnas",
+    values_to = "Valor"
+  ) |>
+  mutate(
+    Filas,
+    Columnas,
+    `Año` = anio,
+    Cuadro = cuadro,
+    Cuadrante = codigo_cuadrante,
+    Unidades = unidad,
+    Precios = precios,
+    Valor,
+    .keep = "none" # Lo mismo que si usamos transmute.
+  )
+```
+
+
+##  {.center}
+
+::: {style="text-align: center"}
+Gracias
+
+renatovargas.com
+:::

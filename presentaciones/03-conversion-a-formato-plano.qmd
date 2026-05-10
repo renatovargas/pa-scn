@@ -1,0 +1,100 @@
+---
+title: "Procedimiento de conversión de cuadros"
+subtitle: "De cuadros de entrada múltiple a archivos de formato plano"
+author: "Renato Vargas (Consultor CEPAL)"
+format: 
+  revealjs:
+    theme: serif
+    footer: "Procedimiento de conversión de cuadros"
+---
+
+## Datos {.smaller}
+
+:::::: columns
+::: {.column width="30%"}
+![](images/paste-48.png)
+:::
+
+:::: {.column width="70%"}
+"Una vez que has importado los datos, es una buena idea **ordenarlos**. **Ordenar** los datos significa guardarlos de una manera consistente que haga coincidir la semántica del set de datos con la manera en que está guardado. En definitiva, **cuando tus datos están ordenados, cada columna es una variable y cada fila una observación**. Tener datos ordenados es importante porque si su estructura es consistente, puedes enfocar tus esfuerzos en las preguntas sobre los datos." </br>
+
+::: {style="text-align: right"}
+*"R Para Ciencia de Datos (2a edición)". Hadley Wickham, Mine Cetinkaya-Rundel (Author), Garrett Grolemund.*
+:::
+::::
+::::::
+
+::: {style="text-align: right"}
+:::
+
+## Estado inicial
+
+![](images/paste-52.png)
+
+## Paso 1
+
+![](images/paste-53.png)
+
+## Paso 2
+
+![](images/paste-57.png)
+
+## Paso 3
+
+![](images/paste-55.png)
+
+##  {.center}
+
+::: {style="text-align: center"}
+Abrir archivo ubicado en:
+
+**"datos/ejemplos"**
+:::
+
+## Activar el asistente de Excel
+
+![](images/paste-58.png)
+
+## Todos los comandos
+
+![](images/paste-59.png)
+
+## Nuevo Grupo {.center}
+
+![](images/paste-60.png)
+
+## Agregar "Asistente para tablas y gráficos"
+
+![](images/paste-61.png)
+
+## Rangos de consolidación múltiple
+
+![](images/paste-62.png)
+
+## Campos de página personalizados
+
+![](images/paste-63.png)
+
+## Seleccionar los datos
+
+![](images/paste-64.png)
+
+## ¿En dónde?
+
+![](images/paste-65.png)
+
+## Eliminar filas y columnas
+
+![](images/paste-66.png)
+
+## Doble click en Suma de Valor
+
+![](images/paste-67.png)
+
+## {.center}
+
+::: {style="text-align: center"}
+Gracias
+
+renatovargas.com
+:::

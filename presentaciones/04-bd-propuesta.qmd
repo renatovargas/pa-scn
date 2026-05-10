@@ -1,0 +1,39 @@
+---
+title: "Familiarización con la base de datos propuesta"
+subtitle: "Ejercicios Prácticos"
+author: "Renato Vargas (Consultor CEPAL)"
+format: 
+  revealjs:
+    theme: serif
+    footer: "Base de datos propuesta"
+---
+
+## La Base de Datos Resultante
+
+- Archivo plano estructurado al cual se han añadido campos descriptivos y de resumen.
+- Contiene un solo campo con todos los valores. 
+- Se compone de tres grupos de campos descriptivos:
+  - Transacciones.
+  - Actividades.
+  - Productos.
+
+
+## {.center}
+
+::: {style="text-align: center"}
+Nuestra carpeta compartida:
+
+**https://bit.ly/pa-scn**
+
+Abrimos el archivo:
+
+**dia02/data/ejemplo/pan_scn_ejemplo.xlsx**
+:::
+
+## {.center}
+
+::: {style="text-align: center"}
+Gracias
+
+renatovargas.com
+:::
