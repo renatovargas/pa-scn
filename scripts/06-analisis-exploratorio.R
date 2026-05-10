@@ -1,4 +1,5 @@
-## Datos
+# Análisis exploratorio de datos
+# Renato Vargas
 
 # Primero llamamos las librerías necesarias.
 

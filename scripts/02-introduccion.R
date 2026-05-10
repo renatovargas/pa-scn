@@ -1,3 +1,6 @@
+# Introducción a R para datos macroeconómicos
+# Renato Vargas
+
 # Las funciones de R
 ## funcion( objeto, parametro1 = "", parametro2 = 23, parametro3 = TRUE)
 

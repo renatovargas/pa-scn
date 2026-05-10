@@ -1,4 +1,4 @@
-# Script de procesamiento COU
+# Script de procesamiento COU con funciones
 # Renato Vargas
 
 # Librerías

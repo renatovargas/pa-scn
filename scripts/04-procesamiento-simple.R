@@ -1,4 +1,4 @@
-# Script de procesamiento COU
+# Script de procesamiento COU sin funciones
 # Renato Vargas
 
 # Librerías (la mayoría se puede cargar con tidyverse)
@@ -83,6 +83,13 @@ if (length(excluir_filas) > 0) {
 }
 
 if (length(excluir_columnas) > 0) {
+  # Puesto que agregamos una columna de nombres al inicio
+  # debemos correr las columnas a excluir por una posición
+  # lo que se logra con (exlcuir_columnas + 1) abajo.
+  # Otra forma de hacerlo sería quitar el .before = 1 en
+  # la línaea 77 en el último mutate() de arriba para que
+  # quede al final y no modifique las posiciones, pero esto
+  # funciona bien.
   datos4 <- datos3[, -(excluir_columnas + 1), drop = FALSE]
 }
 

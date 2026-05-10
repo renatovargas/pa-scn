@@ -1,3 +1,6 @@
+# Introducción a ingesta de datos y Tidyverse
+# Renato Vargas
+
 # Limpiar el área de trabajo
 rm(list = ls())
 
