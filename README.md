@@ -29,6 +29,24 @@ El repositorio busca equilibrar:
 
 ---
 
+# Filosofía del curso
+
+Este curso busca enseñar procesamiento de información macroeconómica de forma práctica y aplicada para agregar el tema de la bioeconomía a las cuentas nacionales.
+
+El énfasis no está únicamente en escribir código, sino en desarrollar:
+
+- estructuras reproducibles,
+- flujos transparentes,
+- productos compatibles con necesidades institucionales,
+- y herramientas mantenibles por equipos técnicos.
+
+El objetivo final es que las y los participantes puedan:
+
+- comprender completamente el flujo de transformación,
+- adaptar los scripts a sus propias necesidades,
+- automatizar procesos repetitivos,
+- y producir cuadros estadísticos de alta calidad de manera reproducible.
+
 # Estructura del repositorio
 
 ## `data/`
@@ -260,22 +278,4 @@ Contiene funciones dedicadas a la exportación y formateo avanzado de cuadros en
 - exportación multi-hoja,
 - y construcción de productos listos para publicación.
 
----
 
-# Filosofía del curso
-
-Este curso busca enseñar procesamiento de información macroeconómica de forma práctica y aplicada para agregar el tema de la bioeconomía a las cuentas nacionales.
-
-El énfasis no está únicamente en escribir código, sino en desarrollar:
-
-- estructuras reproducibles,
-- flujos transparentes,
-- productos compatibles con necesidades institucionales,
-- y herramientas mantenibles por equipos técnicos.
-
-El objetivo final es que las y los participantes puedan:
-
-- comprender completamente el flujo de transformación,
-- adaptar los scripts a sus propias necesidades,
-- automatizar procesos repetitivos,
-- y producir cuadros estadísticos de alta calidad de manera reproducible.
