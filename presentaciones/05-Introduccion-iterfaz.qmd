@@ -31,7 +31,7 @@ R es un conjunto integrado de herramientas de software para la manipulación de 
 
 ## Carpeta para este día
 
-- https://bit.ly/pa-scn 
+- https://github.com/renatovargas/pa-scn 
 
 
 ##  {.center}

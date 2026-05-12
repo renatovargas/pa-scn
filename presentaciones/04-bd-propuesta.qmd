@@ -23,7 +23,7 @@ format:
 ::: {style="text-align: center"}
 Nuestra carpeta compartida:
 
-**https://bit.ly/pa-scn**
+**https://github.com/renatovargas/pa-scn**
 
 Abrimos el archivo:
 

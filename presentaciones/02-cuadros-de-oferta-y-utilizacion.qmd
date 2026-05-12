@@ -91,7 +91,7 @@ Naciones Unidas et al. (2008). Sistema de Cuentas Nacionales 2008, Nueva York.
 
 Descargar carpeta completa:
 
-**https://bit.ly/pa-scn**
+**https://github.com/renatovargas/pa-scn**
 
 Abrir archivo ubicado en:
 

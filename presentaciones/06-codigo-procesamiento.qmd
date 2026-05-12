@@ -58,13 +58,14 @@ datos2 <- datos1 |>
 
 ## Deshacernos de columnas y filas redundantes o vacías
 
-```{.r code-line-numbers="|1-3|5-7"}
+```{.r code-line-numbers="|1-3|4-5|6-8"}
 if (length(excluir_filas) > 0) {
   datos3 <- datos2[-excluir_filas, , drop = FALSE]
 }
-
+# Correr una posición abajo porque agregamos una columna
+# de nombres
 if (length(excluir_columnas) > 0) {
-  datos3 <- datos3[, -excluir_columnas, drop = FALSE]
+  datos4 <- datos3[, -(excluir_columnas + 1), drop = FALSE]
 }
 ```
 
