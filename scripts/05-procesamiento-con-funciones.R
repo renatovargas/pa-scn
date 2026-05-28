@@ -98,3 +98,21 @@ write.xlsx(
 # Toda la base de datos en RDS
 # Formato binario de R que ocupa muy poco espacio en disco
 saveRDS(pan_scn, file = "salidas/pan_scn.RDS")
+
+# Guardar como base de datos
+library(DBI)
+library(duckdb)
+
+con <- dbConnect(duckdb(), dbdir = "salidas/pan_scn.duckdb")
+
+pan_scn_data <- readRDS("salidas/pan_scn.RDS")
+
+# Convertir a data.frame para guardar como base de datos
+dbWriteTable(
+  con,
+  name = "pan_scn",
+  value = as.data.frame(pan_scn_data),
+  overwrite = TRUE
+)
+
+dbDisconnect(con, shutdown = TRUE)
