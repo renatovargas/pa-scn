@@ -10,7 +10,7 @@ library(gt)
 rm(list = ls())
 # Seguidamente, importamos los datos de la cuenta de Bioeconomía.
 
-pan_scn <- readRDS("salidas/pan_scn.RDS")
+pan_scn <- readRDS("salidas/pan_scn_oficial.RDS")
 
 
 # Y probamos hacer un resumen para una actividad económica en particular.

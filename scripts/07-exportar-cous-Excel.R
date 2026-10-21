@@ -9,7 +9,7 @@ library(openxlsx)
 rm(list = ls())
 
 # Cargamos nuestros datos procesados
-pan_scn <- readRDS("salidas/pan_scn.RDS")
+pan_scn <- readRDS("salidas/pan_scn_oficial.RDS")
 
 # COU resumido de la Bioeconomía
 library(dplyr)
@@ -420,6 +420,6 @@ setRowHeights(
 # Guardar
 saveWorkbook(
   wb,
-  file = "salidas/cou_bioeconomia_agregado_2022.xlsx",
+  file = "salidas/cou_bioeconomia_agregado_2022_oficial.xlsx",
   overwrite = TRUE
 )

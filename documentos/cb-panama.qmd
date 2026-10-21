@@ -1,0 +1,1205 @@
+---
+title: "Cuenta de Bioeconomía de Panamá"
+author:
+  - name: "Renato Vargas"
+    id: rv
+    affiliation: 
+      - name: "Consultor para CEPAL"
+  - name: "Andrés Mondaini"
+    id: am
+    affiliation: 
+      - name: "CEPAL"
+  - name: "Adrián Rodríguez"
+    id: ar
+    affiliation: 
+      - name: "CEPAL"
+format:
+  html:
+    toc: true
+    html-math-method: katex
+    # css: styles.css
+  docx:
+    reference-doc: custom-reference-doc.docx
+    toc: true
+    number-sections: true
+    syntax-highlighting: github
+  # pdf:
+  #   toc: true
+  #   number-sections: true
+  #   colorlinks: true
+lang: es
+bibliography: references.bib
+csl: apa-es.csl
+---
+
+```{r}
+#| label: setup
+#| include: false
+#| echo: false
+#| warning: false
+#| message: false
+library(tidyverse)
+library(flextable)
+library(readxl)
+
+# Base de datos procesada a partir de la Tabla plana oficial
+# (scripts/09-procesamiento-tabla-oficial.R). Se busca desde la raíz del
+# proyecto o desde la carpeta documentos/.
+ruta_rds <- c("salidas/pan_scn_oficial.RDS", "../salidas/pan_scn_oficial.RDS")
+ruta_rds <- ruta_rds[file.exists(ruta_rds)][1]
+
+# Se usan los nombres de columna del documento original
+df <- readRDS(ruta_rds) |>
+  rename(
+    year = `Año`,
+    value = Valor,
+    tabla_destino = Cuadro,
+    `Área transaccional columnas No.` = `Código área transaccional columnas`,
+    `Transacciones Agregadas` = `Transacciones agregadas`
+  )
+
+anio_ini <- min(df$year)
+anio_ref <- max(df$year)
+anios <- anio_ini:anio_ref
+estatus_ref <- df |>
+  filter(year == anio_ref) |>
+  distinct(Estatus) |>
+  pull(Estatus)
+
+bio_levels <- c("Bioeconomía", "Bioeconomía extendida", "No bioeconomía")
+
+bio_colores <- c(
+  "Bioeconomía" = "#2E8B57",
+  "Bioeconomía extendida" = "#87CEEB",
+  "No bioeconomía" = "#D3D3D3"
+)
+
+fmt_num <- function(x) {
+  formatC(x, format = "f", digits = 1, big.mark = ",", decimal.mark = ".")
+}
+
+# Tabla para el documento (flextable). Los números se formatean antes de
+# imprimir. La fila cuya primera columna dice "Total" va en negrita.
+# `ancho` es el ancho útil de la página en pulgadas (carta vertical con
+# márgenes de 1" = 6.5).
+mostrar_tabla <- function(
+  datos,
+  decimales = 1,
+  etiquetas = names(datos),
+  ancho = 6.5,
+  tamano = 9
+) {
+  decimales <- rlang::set_names(
+    rep(decimales[1], ncol(datos)),
+    names(datos)
+  ) |>
+    replace(names(decimales)[-1], decimales[-1])
+
+  formateado <- datos |>
+    mutate(
+      across(
+        where(is.numeric),
+        \(x) {
+          d <- decimales[[cur_column()]]
+          # round(...) + 0 evita el "-0.0" de los ceros negativos
+          formatC(round(x, d) + 0, format = "f", digits = d, big.mark = ",", decimal.mark = ".")
+        }
+      )
+    )
+
+  filas_total <- which(formateado[[1]] == "Total")
+
+  ft <- flextable(formateado) |>
+    set_header_labels(values = rlang::set_names(as.list(etiquetas), names(datos))) |>
+    theme_booktabs(bold_header = TRUE) |>
+    font(fontname = "Aptos", part = "all") |>
+    fontsize(size = tamano, part = "all") |>
+    padding(padding.top = 2, padding.bottom = 2, part = "all") |>
+    align(j = 1, align = "left", part = "all") |>
+    align(j = -1, align = "right", part = "all") |>
+    valign(valign = "bottom", part = "header")
+
+  if (length(filas_total) > 0) {
+    ft <- ft |>
+      bold(i = filas_total, part = "body") |>
+      hline(i = filas_total - 1, border = officer::fp_border(width = 0.75), part = "body")
+  }
+
+  # Se estiman los anchos por contenido y se reparten para llenar el ancho
+  # de la página, sin reducir el tamaño de la letra
+  ft <- autofit(ft)
+  anchos <- dim(ft)$widths
+  width(ft, width = anchos / sum(anchos) * ancho)
+}
+
+# Títulos y referencias de tablas. Quarto 1.10 genera para las tablas de Word
+# un contenedor con XML duplicado que Word debe "reparar" y que comprime las
+# columnas, así que los títulos se escriben como párrafos con estilo
+# "Table Caption" y la numeración se fija aquí.
+tablas_num <- c(
+  oferta = 1, oferta_resto = 2, utilizacion = 3, demanda = 4,
+  vab = 5, manufactura = 6, impuestos = 7, temporal = 8
+)
+
+ref_tabla <- function(id) paste("Tabla", tablas_num[[id]])
+
+titulo_tabla <- function(id, texto) {
+  cat(
+    '\n::: {custom-style="Table Caption"}\n',
+    "**", ref_tabla(id), ".** ", texto, "\n:::\n\n",
+    sep = ""
+  )
+}
+
+figuras_num <- c(produccion = 1, ci = 2, importaciones = 3, temporal = 4, regional = 5)
+
+ref_figura <- function(id) paste("Figura", figuras_num[[id]])
+
+titulo_figura <- function(id, texto) {
+  cat(
+    '\n::: {custom-style="Image Caption"}\n',
+    "**", ref_figura(id), ".** ", texto, "\n:::\n\n",
+    sep = ""
+  )
+}
+
+agrupar_ciiu <- function(seccion) {
+  case_when(
+    seccion == "A" ~ "A: Agricultura",
+    seccion == "B" ~ "B: Minas y canteras",
+    seccion == "C" ~ "C: Manufactura",
+    seccion %in% c("D", "E") ~ "D-E: Serv. públicos",
+    seccion == "F" ~ "F: Construcción",
+    seccion == "G" ~ "G: Comercio",
+    seccion %in%
+      c(
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T"
+      ) ~ "H-S: Otros servicios",
+    TRUE ~ "Otros"
+  )
+}
+
+orden_ciiu <- c(
+  "A: Agricultura",
+  "B: Minas y canteras",
+  "C: Manufactura",
+  "D-E: Serv. públicos",
+  "F: Construcción",
+  "G: Comercio",
+  "H-S: Otros servicios"
+)
+
+# Cifras que se citan en el texto (se recalculan con los datos)
+fmt1 <- function(x) formatC(x, format = "f", digits = 1, decimal.mark = ".")
+
+cifras_texto <- df |>
+  filter(
+    `Área transaccional columnas No.` == "ATC01",
+    `Clasificación Bioeconomía Productos` %in% bio_levels
+  ) |>
+  summarize(
+    valor = sum(value, na.rm = TRUE),
+    .by = c(year, tabla_destino, `Clasificación Bioeconomía Productos`)
+  ) |>
+  pivot_wider(names_from = tabla_destino, values_from = valor) |>
+  mutate(
+    VAB = `01 Oferta` - `02 Utilización`,
+    pct_prod = `01 Oferta` / sum(`01 Oferta`) * 100,
+    pct_ci = `02 Utilización` / sum(`02 Utilización`) * 100,
+    pct_vab = VAB / sum(VAB) * 100,
+    .by = year
+  )
+
+cifra <- function(variable, bio, anio = anio_ref) {
+  cifras_texto |>
+    filter(
+      year == anio,
+      `Clasificación Bioeconomía Productos` == bio
+    ) |>
+    pull({{ variable }})
+}
+
+n_productos <- df |>
+  filter(year == anio_ref) |>
+  summarize(n_distinct(`Código Nomenclatura Local de Productos`, na.rm = TRUE)) |>
+  pull()
+
+n_actividades <- df |>
+  filter(year == anio_ref, !is.na(`Código Clasificación Actividades`)) |>
+  summarize(
+    n_distinct(`Código Clasificación Actividades`, `Condición de Mercado`)
+  ) |>
+  pull()
+```
+
+## Resumen {.unnumbered}
+
+El presente documento describe la construcción de una cuenta satélite de bioeconomía para Panamá, utilizando los Cuadros de Oferta y Utilización (COU) del Sistema de Cuentas Nacionales para el período `r anio_ini`--`r anio_ref`. A través de una clasificación de productos basada en la Clasificación Central de Productos (CPC), se distingue entre productos de bioeconomía directa, bioeconomía extendida y no bioeconomía. Los resultados para `r anio_ref` (cifras provisionales) indican que la bioeconomía directa representa aproximadamente el `r fmt1(cifra(pct_prod, "Bioeconomía"))`% de la producción total del país y cerca del `r fmt1(cifra(pct_vab, "Bioeconomía"))`% del valor agregado bruto, mientras que la bioeconomía extendida aporta un `r fmt1(cifra(pct_prod, "Bioeconomía extendida"))`% adicional a la producción y un `r fmt1(cifra(pct_vab, "Bioeconomía extendida"))`% al valor agregado. La serie temporal `r anio_ini`--`r anio_ref` permite observar el comportamiento de los sectores bioeconómicos durante la contracción económica asociada a la pandemia de COVID-19 en 2020 y su posterior recuperación. Estos resultados constituyen una línea base para el seguimiento de la bioeconomía panameña y sientan las bases para análisis más profundos cuando se disponga de una matriz de insumo-producto actualizada.
+
+**Palabras clave:** bioeconomía, cuentas nacionales, cuentas satélite, cuadros de oferta y utilización, Panamá.
+
+## Introducción
+
+La medición de la bioeconomía se ha posicionado como un tema estratégico para los países de América Latina y el Caribe, pues es una región cuya dotación de recursos naturales y biológicos le confiere ventajas comparativas relevantes para el desarrollo de actividades económicas basadas en la biomasa [@rodriguez_bioeconomia_2017]. Si bien la bioeconomía abarca un espectro amplio de sectores productivos, su contribución al producto interno bruto (PIB) y al empleo no siempre es visible en las estadísticas macroeconómicas convencionales, lo que dificulta su incorporación en el diseño de políticas públicas.
+
+En años recientes, la Comisión Económica para América Latina y el Caribe (CEPAL) ha impulsado el desarrollo de cuentas satélite de bioeconomía para diversos países de la región, aplicando una metodología que se apoya en el marco del Sistema de Cuentas Nacionales (SCN) y en las clasificaciones internacionales de productos y actividades económicas [@vargas_cuenta_2022; @vargas_cuentas_2023]. Estos esfuerzos han permitido obtener estimaciones comparables de la contribución de la bioeconomía en trece países latinoamericanos, revelando estructuras productivas heterogéneas que reflejan las particularidades de cada economía nacional.
+
+Panamá presenta un perfil económico singular en la región. Su economía, fuertemente orientada al sector de servicios; en particular logística, comercio internacional y finanzas, se distingue de las economías vecinas con mayor peso relativo de la agricultura y la manufactura. No obstante, el sector agropecuario, la pesca, la industria alimentaria y otras actividades basadas en recursos biológicos desempeñan un papel significativo en el tejido productivo panameño y en la seguridad alimentaria del país. Cuantificar la dimensión bioeconómica de estas actividades resulta fundamental para una comprensión integral de la estructura productiva nacional.
+
+El presente documento aplica la metodología de cuentas satélite de bioeconomía al caso de Panamá, utilizando los Cuadros de Oferta y Utilización (COU) del Sistema de Cuentas Nacionales elaborados por el Instituto Nacional de Estadística y Censo (INEC) para el período `r anio_ini`--`r anio_ref` [@inec_panama_cou]. A diferencia de otros ejercicios realizados para la región, como el caso de Ecuador que incorporó la Matriz de Insumo-Producto en el análisis [@vargas_ecuador_2025], Panamá no cuenta con una Matriz de Insumo Producto (MIP) actualizada, lo que delimita el alcance del análisis a la contribución directa de la bioeconomía sin incluir encadenamientos productivos ni multiplicadores.
+
+El documento se organiza de la siguiente manera. La @sec-metodologia presenta el marco conceptual y metodológico, incluyendo una breve descripción del SCN, la definición operativa de bioeconomía utilizada y el proceso de clasificación de productos. La @sec-resultados expone los principales resultados para el año `r anio_ref` y la evolución temporal del período `r anio_ini`--`r anio_ref`, así como una comparación con otros países de la región. Finalmente, la @sec-conclusiones ofrece las conclusiones, limitaciones del ejercicio y recomendaciones para futuras actualizaciones.
+
+## Marco conceptual y metodológico {#sec-metodologia}
+
+### El Sistema de Cuentas Nacionales y los cuadros de oferta y utilización
+
+El Sistema de Cuentas Nacionales 2008 [@comision_europea_scn_2016] constituye el marco estadístico internacional que organiza la información sobre la actividad económica de un país. Dentro de este sistema, los Cuadros de Oferta y Utilización (COU) ocupan un lugar central, ya que integran de manera coherente la información sobre la producción, el consumo intermedio, la demanda final y el valor agregado de una economía.
+
+El cuadro de oferta describe el origen de los bienes y servicios disponibles en la economía. En sus filas se registran los productos, clasificados según la Clasificación Central de Productos (CPC), y en sus columnas las actividades económicas que los producen, clasificadas según la Clasificación Industrial Internacional Uniforme (CIIU). A estas columnas se suman las importaciones, los impuestos sobre los productos, las subvenciones y los márgenes de distribución. La identidad contable fundamental establece que la oferta total de cada producto es igual a su utilización total.
+
+El cuadro de utilización, por su parte, muestra el destino de esos bienes y servicios. Su cuerpo principal registra el consumo intermedio. Es decir, los insumos que cada actividad económica adquiere para su proceso productivo. Sus columnas adicionales recogen las exportaciones, el gasto de consumo final y la formación bruta de capital. El valor agregado bruto (VAB) de cada actividad se obtiene como la diferencia entre el valor bruto de su producción a precios básicos y su consumo intermedio:
+
+$$
+\text{VAB} = \text{Producción} - \text{Consumo intermedio}
+$$
+
+El PIB por el lado de la producción se calcula sumando al VAB total los impuestos netos sobre los productos:
+
+$$
+\text{PIB} = \sum \text{VAB} + \text{Impuestos sobre productos} - \text{Subvenciones a productos}
+$$
+
+Para Panamá, los COU utilizados en este ejercicio comprenden `r n_productos` productos y `r n_actividades` actividades económicas (columnas de producción, diferenciadas por condición de mercado) para cada uno de los años del período `r anio_ini`--`r anio_ref`, a precios corrientes expresados en millones de balboas (B/.), moneda equivalente al dólar estadounidense.
+
+### Definición de bioeconomía
+
+La definición de bioeconomía adoptada en este trabajo sigue la propuesta del Consejo Alemán de Bioeconomía, presentada en la Cumbre Global de Bioeconomía de 2018, que establece que la bioeconomía comprende "la producción, utilización y conservación de recursos biológicos, incluyendo el conocimiento, la ciencia, la tecnología y la innovación relacionados, para proporcionar información, productos, procesos y servicios a todos los sectores económicos, con el propósito de avanzar hacia una economía sostenible" [@german_bioeconomy_council_2018].
+
+Esta definición, ampliamente aceptada en la literatura internacional [@iacgb_2018; @iacgb_2020], permite operacionalizar la medición de la bioeconomía a través de los sistemas de cuentas nacionales, al vincularla con los flujos de productos de origen biológico que circulan en la economía. De acuerdo con el enfoque metodológico desarrollado por @vargas_cuenta_2022 y ampliado en @vargas_cuentas_2023, se distinguen tres categorías de productos:
+
+- **Bioeconomía:** Productos que son directamente recursos biológicos o cuyo proceso de producción implica la transformación primaria de biomasa (por ejemplo, productos agrícolas, forestales, pesqueros, alimentos procesados, madera aserrada).
+
+- **Bioeconomía extendida:** Productos cuya elaboración requiere insumos biológicos en una proporción significativa, pero que también incluyen un componente cuya fracción no es evidente de productos no biológicos (por ejemplo, productos farmacéuticos de base biológica, textiles de fibras naturales, biocombustibles).
+
+- **No bioeconomía:** Productos cuyo origen y proceso productivo no involucran de manera directa ni significativa recursos biológicos (por ejemplo, productos de minería, manufactura de metales, servicios financieros).
+
+### Construcción de la cuenta satélite
+
+La construcción de la cuenta satélite de bioeconomía para Panamá sigue la metodología documentada en @vargas_cuenta_2022 y @vargas_cuentas_2023, adaptada a las particularidades de la información disponible para el país. El proceso se desarrolló en las siguientes etapas:
+
+1. **Clasificación de productos:** Cada uno de los `r n_productos` productos del COU de Panamá, identificados mediante la CPC, fue clasificado en una de las tres categorías bioeconómicas descritas anteriormente. Esta clasificación se realizó mediante un análisis de la naturaleza de cada producto en relación con su contenido de recursos biológicos, siguiendo los criterios establecidos en los trabajos previos para otros países de la región.
+
+2. **Reorganización de los COU:** Los cuadros de oferta y utilización fueron reestructurados incorporando la dimensión bioeconómica como una variable adicional de desagregación. Esto permite observar, para cada actividad económica, qué proporción de su producción y de sus insumos corresponde a productos bioeconómicos, de bioeconomía extendida o no bioeconómicos.
+
+3. **Cálculo del valor agregado bioeconómico:** El valor agregado asociado a cada categoría bioeconómica se estimó a través del método del consumo intermedio. Este método distribuye el valor agregado de cada actividad económica en proporción a la composición bioeconómica de su producción, considerando la estructura de insumos. El VAB bioeconómico se obtiene como la diferencia entre la producción clasificada como bioeconómica y el consumo intermedio de productos bioeconómicos.
+
+Las series de `r anio_ini` a `r anio_ref` provienen de la Tabla plana de los cuadros complementarios del INEC, que reúne todos los años con una misma clasificación de actividades (la construcción se desagrega en edificios, obras de ingeniería civil y actividades especializadas) y recoge las revisiones más recientes de las cuentas nacionales. Los datos individuales de la Tabla se ordenaron en los cuadros de oferta, utilización y valor agregado, y se eliminaron los subtotales y totales. Los márgenes de distribución y el ajuste CIF/FOB no vienen en la Tabla, por lo que se recuperaron por la identidad contable de que la oferta total de cada producto es igual a su utilización total. Este procedimiento reproduce celda por celda los COU oficiales de 2022 a 2024. Las cifras de 2024 son provisionales (P).
+
+Es importante señalar que este enfoque captura únicamente la contribución directa de la bioeconomía. Para estimar la contribución indirecta, que incluye los efectos de encadenamiento productivo y los multiplicadores de demanda, sería necesario contar con una Matriz de Insumo-Producto actualizada, como se realizó en el caso de Ecuador [@vargas_ecuador_2025; @miller_blair_2009].
+
+## Resultados {#sec-resultados}
+
+### Oferta bioeconómica
+
+```{r}
+#| label: datos-oferta
+#| echo: false
+#| warning: false
+#| message: false
+oferta_prod <- df |>
+  filter(
+    year == anio_ref,
+    tabla_destino == "01 Oferta",
+    `Área transaccional columnas No.` == "ATC01",
+    `Clasificación Bioeconomía Productos` %in% bio_levels,
+    !is.na(`CIIU Secciones`),
+    `CIIU Secciones` != "-"
+  ) |>
+  mutate(sector = agrupar_ciiu(`CIIU Secciones`)) |>
+  group_by(`Clasificación Bioeconomía Productos`, sector) |>
+  summarize(valor = sum(value, na.rm = TRUE), .groups = "drop")
+
+oferta_otros <- df |>
+  filter(
+    year == anio_ref,
+    tabla_destino == "01 Oferta",
+    `Área transaccional columnas No.` != "ATC01" |
+      is.na(`Área transaccional columnas No.`),
+    `Clasificación Bioeconomía Productos` %in% bio_levels
+  ) |>
+  group_by(`Clasificación Bioeconomía Productos`, `Transacciones Agregadas`) |>
+  summarize(valor = sum(value, na.rm = TRUE), .groups = "drop") |>
+  mutate(
+    sector = case_when(
+      `Transacciones Agregadas` ==
+        "Importaciones de bienes y servicios" ~ "Importaciones",
+      `Transacciones Agregadas` %in%
+        c(
+          "Impuestos sobre la producción y las importaciones",
+          "Subvenciones"
+        ) ~ "Imp. netos",
+      `Transacciones Agregadas` == "Márgenes de distribución" ~ "Márgenes",
+      `Transacciones Agregadas` ==
+        "Ajuste CIF/FOB sobre importaciones" ~ "Ajuste CIF/FOB",
+      TRUE ~ "Otro"
+    )
+  ) |>
+  group_by(`Clasificación Bioeconomía Productos`, sector) |>
+  summarize(valor = sum(valor, na.rm = TRUE), .groups = "drop")
+
+oferta_wide <- bind_rows(oferta_prod, oferta_otros) |>
+  pivot_wider(names_from = sector, values_from = valor, values_fill = 0) |>
+  mutate(
+    `Clasificación Bioeconomía Productos` = factor(
+      `Clasificación Bioeconomía Productos`,
+      levels = bio_levels
+    )
+  ) |>
+  arrange(`Clasificación Bioeconomía Productos`)
+
+cols_produccion <- orden_ciiu[orden_ciiu %in% names(oferta_wide)]
+cols_resto <- c("Importaciones", "Ajuste CIF/FOB", "Imp. netos", "Márgenes")
+cols_resto <- cols_resto[cols_resto %in% names(oferta_wide)]
+
+# Se agrega la fila de total a una tabla cuya primera columna es la categoría
+agregar_total <- function(tabla) {
+  total <- tabla |>
+    summarize(
+      `Clasificación Bioeconomía Productos` = "Total",
+      across(where(is.numeric), \(x) sum(x, na.rm = TRUE))
+    )
+  bind_rows(mutate(tabla, across(1, as.character)), total)
+}
+
+oferta_tabla1 <- oferta_wide |>
+  select(`Clasificación Bioeconomía Productos`, all_of(cols_produccion)) |>
+  mutate(Total = rowSums(across(all_of(cols_produccion)))) |>
+  agregar_total()
+
+oferta_tabla2 <- oferta_wide |>
+  mutate(Producción = rowSums(across(all_of(cols_produccion)))) |>
+  select(`Clasificación Bioeconomía Productos`, Producción, all_of(cols_resto)) |>
+  mutate(`Oferta total` = rowSums(across(-1))) |>
+  agregar_total()
+```
+
+La `r ref_tabla("oferta")` presenta el valor bruto de producción de Panamá para el año `r anio_ref`, desagregado por categoría bioeconómica de los productos y por grupo de sectores de actividad económica. La producción se organiza según las secciones de la CIIU, agrupadas en siete grandes categorías.
+
+```{r}
+#| label: tabla-oferta
+#| results: asis
+#| echo: false
+#| warning: false
+#| message: false
+titulo_tabla("oferta", paste0("Valor bruto de producción por categoría bioeconómica y grupo de sectores, Panamá ", anio_ref, " (millones de B/.)"))
+
+oferta_tabla1 |>
+  rename(` ` = `Clasificación Bioeconomía Productos`) |>
+  mostrar_tabla()
+```
+
+*Fuente: Elaboración propia con datos del INEC Panamá.*
+
+La producción bioeconómica directa se concentra mayoritariamente en el sector agrícola (sección A de la CIIU) y en las industrias manufactureras (sección C), donde se ubican las actividades de procesamiento de alimentos y transformación de recursos naturales. La bioeconomía extendida muestra una presencia significativa en la manufactura, reflejando la utilización de insumos biológicos en procesos de mayor transformación industrial.
+
+La `r ref_tabla("oferta_resto")` completa la oferta total a precios de comprador. A la producción se suman las importaciones, el ajuste CIF/FOB, los impuestos netos sobre los productos (impuestos menos subvenciones) y los márgenes de distribución. El ajuste CIF/FOB corrige la valoración de las importaciones de servicios de transporte y seguros, y los márgenes de distribución solo redistribuyen valor entre productos, por lo que suman cero en el total de la economía.
+
+```{r}
+#| label: tabla-oferta-resto
+#| results: asis
+#| echo: false
+#| warning: false
+#| message: false
+titulo_tabla("oferta_resto", paste0("Oferta total a precios de comprador por categoría bioeconómica, Panamá ", anio_ref, " (millones de B/.)"))
+
+oferta_tabla2 |>
+  rename(` ` = `Clasificación Bioeconomía Productos`) |>
+  mostrar_tabla()
+```
+
+*Fuente: Elaboración propia con datos del INEC Panamá.*
+
+### Utilización bioeconómica
+
+```{r}
+#| label: datos-utilizacion
+#| echo: false
+#| warning: false
+#| message: false
+ci_data <- df |>
+  filter(
+    year == anio_ref,
+    tabla_destino == "02 Utilización",
+    `Área transaccional columnas No.` == "ATC01",
+    `Clasificación Bioeconomía Productos` %in% bio_levels,
+    !is.na(`CIIU Secciones`),
+    `CIIU Secciones` != "-"
+  ) |>
+  mutate(sector = agrupar_ciiu(`CIIU Secciones`)) |>
+  group_by(`Clasificación Bioeconomía Productos`, sector) |>
+  summarize(valor = sum(value, na.rm = TRUE), .groups = "drop")
+
+ci_wide <- ci_data |>
+  pivot_wider(names_from = sector, values_from = valor, values_fill = 0) |>
+  mutate(
+    `Clasificación Bioeconomía Productos` = factor(
+      `Clasificación Bioeconomía Productos`,
+      levels = bio_levels
+    )
+  ) |>
+  arrange(`Clasificación Bioeconomía Productos`)
+
+ci_cols <- orden_ciiu[orden_ciiu %in% names(ci_wide)]
+
+ci_tabla <- ci_wide |>
+  mutate(Total = rowSums(across(all_of(ci_cols)))) |>
+  agregar_total()
+
+# Resto de los usos: exportaciones, consumo final y formación de capital
+destinos <- c(
+  `18` = "Exportaciones",
+  `19` = "Exportaciones",
+  `7` = "Consumo final hogares",
+  `8` = "Consumo final ISFLSH",
+  `10` = "Consumo final gobierno",
+  `14` = "Formación bruta de capital fijo",
+  `16` = "Variación de existencias"
+)
+
+demanda_tabla <- df |>
+  filter(
+    year == anio_ref,
+    tabla_destino == "02 Utilización",
+    `Área transaccional columnas No.` != "ATC01",
+    `Clasificación Bioeconomía Productos` %in% bio_levels
+  ) |>
+  mutate(destino = destinos[as.character(`Código Transacciones`)]) |>
+  summarize(
+    valor = sum(value, na.rm = TRUE),
+    .by = c(`Clasificación Bioeconomía Productos`, destino)
+  ) |>
+  pivot_wider(names_from = destino, values_from = valor, values_fill = 0) |>
+  left_join(
+    ci_tabla |>
+      filter(`Clasificación Bioeconomía Productos` != "Total") |>
+      select(`Clasificación Bioeconomía Productos`, `Consumo intermedio` = Total),
+    by = "Clasificación Bioeconomía Productos"
+  ) |>
+  mutate(
+    `Clasificación Bioeconomía Productos` = factor(
+      `Clasificación Bioeconomía Productos`,
+      levels = bio_levels
+    )
+  ) |>
+  arrange(`Clasificación Bioeconomía Productos`) |>
+  select(
+    `Clasificación Bioeconomía Productos`,
+    `Consumo intermedio`,
+    Exportaciones,
+    `Consumo final hogares`,
+    `Consumo final ISFLSH`,
+    `Consumo final gobierno`,
+    `Formación bruta de capital fijo`,
+    `Variación de existencias`
+  ) |>
+  mutate(`Utilización total` = rowSums(across(-1))) |>
+  agregar_total()
+
+# Control: la utilización total debe ser igual a la oferta total
+stopifnot(
+  isTRUE(all.equal(
+    demanda_tabla$`Utilización total`,
+    oferta_tabla2$`Oferta total`
+  ))
+)
+
+# Participaciones sobre la utilización total, para el texto
+pct_uso <- demanda_tabla |>
+  filter(`Clasificación Bioeconomía Productos` != "Total") |>
+  mutate(across(-c(1, `Utilización total`), \(x) x / `Utilización total` * 100)) |>
+  mutate(`Clasificación Bioeconomía Productos` = as.character(`Clasificación Bioeconomía Productos`)) |>
+  column_to_rownames("Clasificación Bioeconomía Productos")
+```
+
+La `r ref_tabla("utilizacion")` muestra la composición del consumo intermedio por categoría bioeconómica y grupo de sectores de actividad económica para `r anio_ref`. Este cuadro permite identificar qué sectores de la economía panameña son los principales demandantes de insumos bioeconómicos.
+
+```{r}
+#| label: tabla-utilizacion
+#| results: asis
+#| echo: false
+#| warning: false
+#| message: false
+titulo_tabla("utilizacion", paste0("Consumo intermedio por categoría bioeconómica y grupo de sectores, Panamá ", anio_ref, " (millones de B/.)"))
+
+ci_tabla |>
+  rename(` ` = `Clasificación Bioeconomía Productos`) |>
+  mostrar_tabla()
+```
+
+*Fuente: Elaboración propia con datos del INEC Panamá.*
+
+El consumo intermedio de productos bioeconómicos es particularmente relevante en la manufactura y en la agricultura, sectores que demandan volúmenes significativos de materias primas de origen biológico. Los sectores de servicios, aunque dominan la estructura económica panameña en términos de valor agregado, presentan una dependencia comparativamente menor de insumos bioeconómicos.
+
+La `r ref_tabla("demanda")` completa la utilización con los demás usos de los productos: las exportaciones, el gasto de consumo final de los hogares, de las instituciones sin fines de lucro que sirven a los hogares (ISFLSH) y del gobierno, la formación bruta de capital fijo y la variación de existencias. Para cada categoría, la utilización total es igual a la oferta total de la `r ref_tabla("oferta_resto")`. En la bioeconomía directa, el consumo intermedio absorbe el `r fmt1(pct_uso["Bioeconomía", "Consumo intermedio"])`% de la utilización total, el consumo final de los hogares el `r fmt1(pct_uso["Bioeconomía", "Consumo final hogares"])`% y las exportaciones el `r fmt1(pct_uso["Bioeconomía", "Exportaciones"])`%. En la bioeconomía extendida, esos porcentajes son `r fmt1(pct_uso["Bioeconomía extendida", "Consumo intermedio"])`%, `r fmt1(pct_uso["Bioeconomía extendida", "Consumo final hogares"])`% y `r fmt1(pct_uso["Bioeconomía extendida", "Exportaciones"])`%, respectivamente.
+
+```{r}
+#| label: tabla-demanda
+#| results: asis
+#| echo: false
+#| warning: false
+#| message: false
+titulo_tabla("demanda", paste0("Utilización total por categoría bioeconómica y tipo de uso, Panamá ", anio_ref, " (millones de B/.)"))
+
+demanda_tabla |>
+  rename(` ` = `Clasificación Bioeconomía Productos`) |>
+  mostrar_tabla(
+    etiquetas = c(
+      " ", "Consumo intermedio", "Exportaciones", "Consumo final hogares",
+      "Consumo final ISFLSH", "Consumo final gobierno", "FBKF",
+      "Variación de existencias", "Utilización total"
+    )
+  )
+```
+
+*Fuente: Elaboración propia con datos del INEC Panamá. FBKF: formación bruta de capital fijo.*
+
+### Valor agregado bruto y PIB bioeconómico
+
+A partir de los cuadros de oferta y utilización, es posible calcular el valor agregado bruto (VAB) asociado a cada categoría bioeconómica. La `r ref_tabla("vab")` presenta esta descomposición para `r anio_ref`, junto con la contribución porcentual de cada categoría.
+
+```{r}
+#| label: tabla-vab
+#| results: asis
+#| echo: false
+#| warning: false
+#| message: false
+titulo_tabla("vab", paste0("Valor agregado bruto por categoría bioeconómica, Panamá ", anio_ref, " (millones de B/.)"))
+
+produccion <- df |>
+  filter(
+    year == anio_ref,
+    tabla_destino == "01 Oferta",
+    `Área transaccional columnas No.` == "ATC01",
+    `Clasificación Bioeconomía Productos` %in% bio_levels
+  ) |>
+  group_by(`Clasificación Bioeconomía Productos`) |>
+  summarize(Producción = sum(value, na.rm = TRUE), .groups = "drop")
+
+consumo_int <- df |>
+  filter(
+    year == anio_ref,
+    tabla_destino == "02 Utilización",
+    `Área transaccional columnas No.` == "ATC01",
+    `Clasificación Bioeconomía Productos` %in% bio_levels
+  ) |>
+  group_by(`Clasificación Bioeconomía Productos`) |>
+  summarize(CI = sum(value, na.rm = TRUE), .groups = "drop")
+
+vab <- produccion |>
+  left_join(consumo_int, by = "Clasificación Bioeconomía Productos") |>
+  mutate(
+    VAB = Producción - CI,
+    `Clasificación Bioeconomía Productos` = factor(
+      `Clasificación Bioeconomía Productos`,
+      levels = bio_levels
+    )
+  ) |>
+  arrange(`Clasificación Bioeconomía Productos`)
+
+totals_vab <- vab |>
+  summarize(
+    `Clasificación Bioeconomía Productos` = "Total",
+    Producción = sum(Producción),
+    CI = sum(CI),
+    VAB = sum(VAB)
+  )
+
+vab_tabla <- bind_rows(vab, totals_vab) |>
+  mutate(
+    `% Producción` = Producción / sum(produccion$Producción) * 100,
+    `% CI` = CI / sum(consumo_int$CI) * 100,
+    `% VAB` = VAB / last(VAB) * 100
+  )
+
+vab_tabla |>
+  rename(` ` = `Clasificación Bioeconomía Productos`) |>
+  mostrar_tabla(
+    decimales = 1,
+    etiquetas = c(
+      " ", "Producción", "Consumo intermedio", "VAB",
+      "% Producción", "% CI", "% VAB"
+    )
+  )
+```
+
+*Fuente: Elaboración propia con datos del INEC Panamá.*
+
+Los resultados revelan que la bioeconomía directa contribuye con aproximadamente el `r fmt1(cifra(pct_vab, "Bioeconomía"))`% del VAB total de Panamá, mientras que la bioeconomía extendida aporta alrededor del `r fmt1(cifra(pct_vab, "Bioeconomía extendida"))`% adicional. En conjunto, las actividades asociadas a la bioeconomía representan cerca del `r fmt1(cifra(pct_vab, "Bioeconomía") + cifra(pct_vab, "Bioeconomía extendida"))`% del valor agregado bruto de la economía panameña. Si bien esta proporción es menor que la observada en economías con mayor peso relativo del sector primario, como Nicaragua o Honduras, donde supera el 25% [@vargas_cuentas_2023], refleja la estructura terciaria predominante de la economía de Panamá.
+
+### Composición bioeconómica de la producción y el consumo intermedio
+
+La `r ref_figura("produccion")` muestra la composición bioeconómica de la producción bruta por grupo de sectores de actividad económica (secciones de la CIIU agrupadas) para `r anio_ref`. Este gráfico permite visualizar en qué medida cada grupo de sectores depende de la producción de bienes de origen biológico.
+
+```{r}
+#| label: figura-produccion
+#| fig-width: 8
+#| fig-height: 5
+#| echo: false
+#| warning: false
+#| message: false
+prod_sector <- df |>
+  filter(
+    year == anio_ref,
+    tabla_destino == "01 Oferta",
+    `Área transaccional columnas No.` == "ATC01",
+    `Clasificación Bioeconomía Productos` %in% bio_levels,
+    !is.na(`CIIU Secciones`),
+    `CIIU Secciones` != "-"
+  ) |>
+  mutate(
+    sector = factor(agrupar_ciiu(`CIIU Secciones`), levels = orden_ciiu),
+    bio = factor(
+      `Clasificación Bioeconomía Productos`,
+      levels = rev(bio_levels)
+    )
+  ) |>
+  group_by(sector, bio) |>
+  summarize(valor = sum(value, na.rm = TRUE), .groups = "drop")
+
+ggplot(prod_sector, aes(x = sector, y = valor, fill = bio)) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_fill_manual(values = rev(bio_colores)) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(x = NULL, y = "Porcentaje", fill = "Clasificación") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 9))
+```
+
+```{r}
+#| label: leyenda-produccion
+#| results: asis
+#| echo: false
+titulo_figura("produccion", paste0("Composición bioeconómica de la producción por grupo de sectores, Panamá ", anio_ref))
+```
+
+El sector agrícola (A) presenta la mayor proporción de producción bioeconómica, como cabría esperar dada la naturaleza de sus actividades. Las industrias manufactureras (C) muestran una composición mixta, con presencia de bioeconomía y bioeconomía extendida significativas, reflejando las cadenas de transformación de alimentos y otros productos de origen biológico. Los sectores de servicios presentan proporciones bajas de producción bioeconómica.
+
+```{r}
+#| label: datos-manufactura
+#| echo: false
+#| warning: false
+#| message: false
+manuf <- df |>
+  filter(
+    year == anio_ref,
+    tabla_destino == "01 Oferta",
+    `Área transaccional columnas No.` == "ATC01",
+    `CIIU Secciones` == "C",
+    `Clasificación Bioeconomía Productos` %in% bio_levels
+  )
+
+manuf_pct <- manuf |>
+  summarize(valor = sum(value), .by = `Clasificación Bioeconomía Productos`) |>
+  mutate(pct = valor / sum(valor) * 100) |>
+  column_to_rownames("Clasificación Bioeconomía Productos")
+
+manuf_actividades <- manuf |>
+  summarize(
+    total = sum(value),
+    bio = sum(value[`Clasificación Bioeconomía Productos` == "Bioeconomía"]),
+    .by = c(`Código Clasificación Actividades`, `Descripción Actividades`)
+  ) |>
+  mutate(
+    pct_bio = bio / total * 100,
+    pct_manuf_bio = bio / sum(bio) * 100
+  ) |>
+  arrange(desc(bio))
+
+manuf_top <- manuf_actividades |> slice_head(n = 6)
+
+manuf_productos <- manuf |>
+  filter(`Clasificación Bioeconomía Productos` == "Bioeconomía") |>
+  summarize(
+    valor = sum(value),
+    .by = c(`Código Nomenclatura Local de Productos`, `Nomenclatura Local de Productos`)
+  ) |>
+  mutate(pct = valor / sum(valor) * 100) |>
+  arrange(desc(valor))
+
+pct_producto <- function(codigo) {
+  manuf_productos |>
+    filter(`Código Nomenclatura Local de Productos` == codigo) |>
+    pull(pct)
+}
+
+manuf_resto <- manuf_actividades |>
+  slice(-(1:6)) |>
+  summarize(
+    total = sum(total),
+    bio = sum(bio),
+    pct_bio = bio / total * 100
+  )
+
+manuf_tabla <- manuf_top |>
+  transmute(
+    Actividad = paste(
+      `Código Clasificación Actividades`,
+      str_to_sentence(str_squish(`Descripción Actividades`))
+    ),
+    `Producción total` = total,
+    `Producción bioeconomía` = bio,
+    `% bioeconomía` = pct_bio,
+    `% de la manufactura bio` = pct_manuf_bio
+  )
+```
+
+El `r fmt1(manuf_pct["Bioeconomía", "pct"])`% de la producción de las industrias manufactureras (sección C) en `r anio_ref` corresponde a productos de bioeconomía directa y un `r fmt1(manuf_pct["Bioeconomía extendida", "pct"])`% adicional a bioeconomía extendida. Esta participación elevada no es una característica de toda la manufactura, sino el resultado de un grupo pequeño de actividades agroindustriales. La `r ref_tabla("manufactura")` muestra las seis actividades con mayor producción bioeconómica: en todas ellas, entre el `r fmt1(min(manuf_top$pct_bio))`% y el `r fmt1(max(manuf_top$pct_bio))`% de la producción corresponde a productos de bioeconomía directa, y en conjunto concentran el `r fmt1(sum(manuf_top$pct_manuf_bio))`% de la producción bioeconómica de la manufactura.
+
+```{r}
+#| label: tabla-manufactura
+#| results: asis
+#| echo: false
+#| warning: false
+#| message: false
+titulo_tabla("manufactura", paste0("Actividades manufactureras con mayor producción de bioeconomía directa, Panamá ", anio_ref, " (millones de B/.)"))
+
+manuf_tabla |>
+  mostrar_tabla(decimales = 1, ancho = 6.5)
+```
+
+*Fuente: Elaboración propia con datos del INEC Panamá.*
+
+La actividad con mayor peso es el procesamiento y conservación de carne, que por sí sola aporta el `r fmt1(manuf_top$pct_manuf_bio[1])`% de la producción bioeconómica manufacturera, seguida de la elaboración de otros productos alimenticios (`r fmt1(manuf_top$pct_manuf_bio[2])`%) y de la molinería y los productos derivados del almidón (`r fmt1(manuf_top$pct_manuf_bio[3])`%). Por producto, destacan la carne de aves de corral (`r fmt1(pct_producto("2103"))`% de la producción bioeconómica manufacturera), el arroz sin cáscara (`r fmt1(pct_producto("2402"))`%), el pescado y los crustáceos preparados o en conserva (`r fmt1(pct_producto("2105"))`%) y las carnes de ganado bovino (`r fmt1(pct_producto("2101"))`%) y porcino (`r fmt1(pct_producto("2102"))`%). Las demás actividades manufactureras juntas producen `r fmt_num(manuf_resto$total)` millones de B/., de los cuales solo el `r fmt1(manuf_resto$pct_bio)`% es bioeconomía directa. Entre las de mayor tamaño de este grupo, la fabricación de otros productos minerales no metálicos, de cemento, cal y yeso, de sustancias y productos químicos, y la reparación y el mantenimiento de maquinaria no tienen producción bioeconómica relevante.
+
+Dos conclusiones se desprenden de este resultado. Primero, la bioeconomía manufacturera de Panamá es, en la práctica, agroindustria alimentaria: carne, molinería y arroz, pescado, bebidas y lácteos. Segundo, la medición para la sección C depende de la clasificación de pocos productos: de los `r nrow(manuf_productos)` productos manufacturados clasificados como bioeconomía directa, los cinco principales concentran el `r fmt1(sum(head(manuf_productos$pct, 5)))`% de esa producción, por lo que cualquier cambio en su tratamiento tendría un efecto apreciable sobre el total bioeconómico.
+
+La `r ref_figura("ci")` muestra una perspectiva complementaria desde el lado de la demanda de insumos. La composición bioeconómica del consumo intermedio revela qué sectores son los principales usuarios de materias primas e insumos de origen biológico.
+
+```{r}
+#| label: figura-ci
+#| fig-width: 8
+#| fig-height: 5
+#| echo: false
+#| warning: false
+#| message: false
+ci_sector <- df |>
+  filter(
+    year == anio_ref,
+    tabla_destino == "02 Utilización",
+    `Área transaccional columnas No.` == "ATC01",
+    `Clasificación Bioeconomía Productos` %in% bio_levels,
+    !is.na(`CIIU Secciones`),
+    `CIIU Secciones` != "-"
+  ) |>
+  mutate(
+    sector = factor(agrupar_ciiu(`CIIU Secciones`), levels = orden_ciiu),
+    bio = factor(
+      `Clasificación Bioeconomía Productos`,
+      levels = rev(bio_levels)
+    )
+  ) |>
+  group_by(sector, bio) |>
+  summarize(valor = sum(value, na.rm = TRUE), .groups = "drop")
+
+ggplot(ci_sector, aes(x = sector, y = valor, fill = bio)) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_fill_manual(values = rev(bio_colores)) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(x = NULL, y = "Porcentaje", fill = "Clasificación") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 9))
+```
+
+```{r}
+#| label: leyenda-ci
+#| results: asis
+#| echo: false
+titulo_figura("ci", paste0("Composición bioeconómica del consumo intermedio por grupo de sectores, Panamá ", anio_ref))
+```
+
+### Importaciones bioeconómicas
+
+El comercio exterior constituye un canal relevante de transmisión de la bioeconomía. La `r ref_figura("importaciones")` presenta la composición bioeconómica de las importaciones de Panamá en `r anio_ref`.
+
+```{r}
+#| label: figura-importaciones
+#| fig-width: 7
+#| fig-height: 4
+#| echo: false
+#| warning: false
+#| message: false
+imp_data <- df |>
+  filter(
+    year == anio_ref,
+    tabla_destino == "01 Oferta",
+    `Transacciones Agregadas` == "Importaciones de bienes y servicios",
+    `Clasificación Bioeconomía Productos` %in% bio_levels
+  ) |>
+  group_by(`Clasificación Bioeconomía Productos`) |>
+  summarize(valor = sum(value, na.rm = TRUE), .groups = "drop") |>
+  mutate(
+    bio = factor(`Clasificación Bioeconomía Productos`, levels = bio_levels),
+    pct = valor / sum(valor) * 100,
+    etiqueta = paste0(fmt_num(pct), "%")
+  )
+
+ggplot(imp_data, aes(x = bio, y = valor, fill = bio)) +
+  geom_col() +
+  geom_text(aes(label = etiqueta), vjust = -0.5, size = 3.5) +
+  scale_fill_manual(values = bio_colores) +
+  labs(x = NULL, y = "Millones de B/.") +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.15)))
+```
+
+```{r}
+#| label: leyenda-importaciones
+#| results: asis
+#| echo: false
+titulo_figura("importaciones", paste0("Composición bioeconómica de las importaciones, Panamá ", anio_ref, " (millones de B/.)"))
+```
+
+Las importaciones de productos bioeconómicos y de bioeconomía extendida representan una proporción notable de las importaciones totales, lo que refleja la inserción de Panamá en cadenas globales de valor donde los insumos de origen biológico desempeñan un papel relevante. La bioeconomía extendida muestra un peso particularmente alto en las importaciones, reflejando la demanda de productos semi-procesados de origen biológico.
+
+### Impuestos netos sobre productos bioeconómicos
+
+La estructura tributaria aplicada a los productos también presenta diferencias según su clasificación bioeconómica. La `r ref_tabla("impuestos")` muestra los impuestos netos sobre productos (impuestos menos subvenciones) para cada categoría en `r anio_ref`, junto con la tasa impositiva implícita, calculada como el cociente entre los impuestos netos y el valor de producción.
+
+```{r}
+#| label: tabla-impuestos
+#| results: asis
+#| echo: false
+#| warning: false
+#| message: false
+titulo_tabla("impuestos", paste0("Impuestos netos y tasa impositiva implícita por categoría bioeconómica, Panamá ", anio_ref))
+
+impuestos <- df |>
+  filter(
+    year == anio_ref,
+    tabla_destino == "01 Oferta",
+    `Transacciones Agregadas` %in%
+      c(
+        "Impuestos sobre la producción y las importaciones",
+        "Subvenciones"
+      ),
+    `Clasificación Bioeconomía Productos` %in% bio_levels
+  ) |>
+  group_by(`Clasificación Bioeconomía Productos`) |>
+  summarize(imp_netos = sum(value, na.rm = TRUE), .groups = "drop")
+
+prod_total <- df |>
+  filter(
+    year == anio_ref,
+    tabla_destino == "01 Oferta",
+    `Área transaccional columnas No.` == "ATC01",
+    `Clasificación Bioeconomía Productos` %in% bio_levels
+  ) |>
+  group_by(`Clasificación Bioeconomía Productos`) |>
+  summarize(produccion = sum(value, na.rm = TRUE), .groups = "drop")
+
+imp_tabla <- impuestos |>
+  left_join(prod_total, by = "Clasificación Bioeconomía Productos") |>
+  mutate(
+    tasa = imp_netos / produccion * 100,
+    `Clasificación Bioeconomía Productos` = factor(
+      `Clasificación Bioeconomía Productos`,
+      levels = bio_levels
+    )
+  ) |>
+  arrange(`Clasificación Bioeconomía Productos`)
+
+imp_total <- imp_tabla |>
+  summarize(
+    `Clasificación Bioeconomía Productos` = "Total",
+    imp_netos = sum(imp_netos),
+    produccion = sum(produccion),
+    tasa = sum(imp_netos) / sum(produccion) * 100
+  )
+
+bind_rows(imp_tabla, imp_total) |>
+  rename(` ` = `Clasificación Bioeconomía Productos`) |>
+  mostrar_tabla(
+    decimales = c(1, tasa = 2),
+    etiquetas = c(
+      " ", "Impuestos netos (mill. B/.)", "Producción (mill. B/.)",
+      "Tasa implícita (%)"
+    )
+  )
+```
+
+*Fuente: Elaboración propia con datos del INEC Panamá.*
+
+La tasa impositiva implícita permite comparar la carga tributaria relativa entre categorías bioeconómicas. Las diferencias observadas reflejan tanto la estructura de impuestos sobre productos específicos como las exenciones o tratamientos fiscales diferenciados que puedan existir para determinados bienes de origen biológico.
+
+### Evolución temporal 2018--2024
+
+La disponibilidad de datos para siete años consecutivos permite analizar la dinámica de la bioeconomía panameña en el tiempo, período que incluye el impacto de la pandemia de COVID-19 en 2020 y la posterior recuperación económica. La `r ref_tabla("temporal")` presenta la evolución de la participación de cada categoría bioeconómica en la producción total, el consumo intermedio y el valor agregado bruto.
+
+```{r}
+#| label: tabla-temporal
+#| results: asis
+#| echo: false
+#| warning: false
+#| message: false
+titulo_tabla("temporal", paste0("Participación porcentual de la bioeconomía en agregados macroeconómicos, Panamá ", anio_ini, "--", anio_ref))
+
+ts_prod <- df |>
+  filter(
+    tabla_destino == "01 Oferta",
+    `Área transaccional columnas No.` == "ATC01",
+    `Clasificación Bioeconomía Productos` %in% bio_levels
+  ) |>
+  group_by(year, `Clasificación Bioeconomía Productos`) |>
+  summarize(valor = sum(value, na.rm = TRUE), .groups = "drop") |>
+  group_by(year) |>
+  mutate(pct = valor / sum(valor) * 100) |>
+  ungroup() |>
+  filter(
+    `Clasificación Bioeconomía Productos` %in%
+      c("Bioeconomía", "Bioeconomía extendida")
+  ) |>
+  mutate(
+    variable = paste0("Producción: ", `Clasificación Bioeconomía Productos`)
+  )
+
+ts_ci <- df |>
+  filter(
+    tabla_destino == "02 Utilización",
+    `Área transaccional columnas No.` == "ATC01",
+    `Clasificación Bioeconomía Productos` %in% bio_levels
+  ) |>
+  group_by(year, `Clasificación Bioeconomía Productos`) |>
+  summarize(valor = sum(value, na.rm = TRUE), .groups = "drop") |>
+  group_by(year) |>
+  mutate(pct = valor / sum(valor) * 100) |>
+  ungroup() |>
+  filter(
+    `Clasificación Bioeconomía Productos` %in%
+      c("Bioeconomía", "Bioeconomía extendida")
+  ) |>
+  mutate(variable = paste0("CI: ", `Clasificación Bioeconomía Productos`))
+
+ts_vab <- df |>
+  filter(
+    `Área transaccional columnas No.` == "ATC01",
+    `Clasificación Bioeconomía Productos` %in% bio_levels
+  ) |>
+  group_by(year, tabla_destino, `Clasificación Bioeconomía Productos`) |>
+  summarize(valor = sum(value, na.rm = TRUE), .groups = "drop") |>
+  pivot_wider(names_from = tabla_destino, values_from = valor) |>
+  mutate(VAB = `01 Oferta` - `02 Utilización`) |>
+  group_by(year) |>
+  mutate(pct = VAB / sum(VAB) * 100) |>
+  ungroup() |>
+  filter(
+    `Clasificación Bioeconomía Productos` %in%
+      c("Bioeconomía", "Bioeconomía extendida")
+  ) |>
+  mutate(variable = paste0("VAB: ", `Clasificación Bioeconomía Productos`))
+
+ts_all <- bind_rows(
+  ts_prod |> select(year, variable, pct),
+  ts_ci |> select(year, variable, pct),
+  ts_vab |> select(year, variable, pct)
+)
+
+ts_wide <- ts_all |>
+  pivot_wider(names_from = year, values_from = pct)
+
+ts_wide |>
+  rename(` ` = variable) |>
+  mostrar_tabla()
+```
+
+*Fuente: Elaboración propia con datos del INEC Panamá.*
+
+La `r ref_figura("temporal")` muestra gráficamente esta evolución. Las participaciones bioeconómicas en el VAB se mantienen en un rango acotado, pero el año 2020, marcado por la pandemia de COVID-19, muestra un comportamiento diferenciado: la participación de la bioeconomía directa en el VAB pasó de `r fmt1(cifra(pct_vab, "Bioeconomía", anio_ini))`% en `r anio_ini` a `r fmt1(cifra(pct_vab, "Bioeconomía", 2020))`% en 2020, mientras que la de la bioeconomía extendida cayó de `r fmt1(cifra(pct_vab, "Bioeconomía extendida", anio_ini))`% a `r fmt1(cifra(pct_vab, "Bioeconomía extendida", 2020))`%. Es decir, la bioeconomía directa resistió mejor la contracción que el resto de la economía, y la extendida, algo peor. A partir de 2021 ambas participaciones se acercan a sus niveles previos a la pandemia: en `r anio_ref` la bioeconomía directa aporta el `r fmt1(cifra(pct_vab, "Bioeconomía"))`% y la extendida el `r fmt1(cifra(pct_vab, "Bioeconomía extendida"))`% del VAB. Estas participaciones se calculan con valores a precios corrientes, por lo que reflejan también la evolución de los precios relativos.
+
+```{r}
+#| label: figura-temporal
+#| fig-width: 7
+#| fig-height: 4.5
+#| echo: false
+#| warning: false
+#| message: false
+ts_vab_plot <- df |>
+  filter(
+    `Área transaccional columnas No.` == "ATC01",
+    `Clasificación Bioeconomía Productos` %in% bio_levels
+  ) |>
+  group_by(year, tabla_destino, `Clasificación Bioeconomía Productos`) |>
+  summarize(valor = sum(value, na.rm = TRUE), .groups = "drop") |>
+  pivot_wider(names_from = tabla_destino, values_from = valor) |>
+  mutate(VAB = `01 Oferta` - `02 Utilización`) |>
+  group_by(year) |>
+  mutate(pct = VAB / sum(VAB) * 100) |>
+  ungroup() |>
+  filter(`Clasificación Bioeconomía Productos` != "No bioeconomía") |>
+  mutate(
+    bio = factor(
+      `Clasificación Bioeconomía Productos`,
+      levels = c("Bioeconomía", "Bioeconomía extendida")
+    )
+  )
+
+ggplot(ts_vab_plot, aes(x = year, y = pct, color = bio, group = bio)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2.5) +
+  scale_color_manual(values = bio_colores[1:2]) +
+  labs(x = "Año", y = "Participación en el VAB (%)", color = "Clasificación") +
+  theme_minimal() +
+  scale_x_continuous(breaks = anios)
+```
+
+```{r}
+#| label: leyenda-temporal
+#| results: asis
+#| echo: false
+titulo_figura("temporal", paste0("Evolución de la participación bioeconómica en el VAB, Panamá ", anio_ini, "--", anio_ref))
+```
+
+### Comparación regional
+
+Los resultados obtenidos para Panamá pueden contextualizarse dentro del panorama regional. La `r ref_figura("regional")` presenta una comparación de la participación bioeconómica en el valor agregado bruto para trece países de América Latina y el Caribe, con base en los datos de @vargas_cuentas_2023 y los resultados del presente ejercicio.
+
+```{r}
+#| label: figura-regional
+#| fig-width: 9
+#| fig-height: 5
+#| echo: false
+#| warning: false
+#| message: false
+# (Se omite la lectura de material/Figuras.xlsx: el archivo no existe en el
+# proyecto y el objeto no se usa; los valores regionales están en el código.)
+
+pan_vab_bio <- vab |>
+  filter(`Clasificación Bioeconomía Productos` == "Bioeconomía") |>
+  pull(VAB)
+pan_vab_ext <- vab |>
+  filter(`Clasificación Bioeconomía Productos` == "Bioeconomía extendida") |>
+  pull(VAB)
+pan_vab_total <- sum(vab$VAB)
+
+regional <- tibble(
+  pais = c(
+    "NIC",
+    "HND",
+    "GTM",
+    "CRI",
+    "SLV",
+    "ECU",
+    "COL",
+    "PER",
+    "ARG",
+    "DOM",
+    "BRA",
+    "PAN",
+    "CHL"
+  ),
+  bio = c(
+    27.0,
+    25.1,
+    21.2,
+    15.1,
+    13.9,
+    12.7,
+    11.8,
+    10.5,
+    10.2,
+    9.1,
+    8.3,
+    pan_vab_bio / pan_vab_total * 100,
+    5.3
+  ),
+  ext = c(
+    5.2,
+    5.8,
+    4.7,
+    5.9,
+    4.1,
+    5.0,
+    3.0,
+    3.2,
+    4.1,
+    3.3,
+    3.5,
+    pan_vab_ext / pan_vab_total * 100,
+    3.8
+  )
+)
+
+regional_long <- regional |>
+  pivot_longer(cols = c(bio, ext), names_to = "tipo", values_to = "pct") |>
+  mutate(
+    tipo = ifelse(tipo == "bio", "Bioeconomía", "Bioeconomía extendida"),
+    tipo = factor(tipo, levels = c("Bioeconomía extendida", "Bioeconomía")),
+    pais = fct_reorder(pais, pct, .fun = sum)
+  )
+
+ggplot(regional_long, aes(x = pais, y = pct, fill = tipo)) +
+  geom_col() +
+  scale_fill_manual(
+    values = c("Bioeconomía" = "#2E8B57", "Bioeconomía extendida" = "#87CEEB")
+  ) +
+  labs(x = NULL, y = "Participación en el VAB (%)", fill = "Clasificación") +
+  theme_minimal() +
+  coord_flip()
+```
+
+```{r}
+#| label: leyenda-regional
+#| results: asis
+#| echo: false
+titulo_figura("regional", "Participación de la bioeconomía en el VAB de países seleccionados de América Latina y el Caribe (%)")
+```
+
+Como se observa, Panamá se ubica en la parte inferior del rango regional en cuanto a participación bioeconómica en el VAB, resultado coherente con su estructura económica fuertemente orientada a los servicios. Los países centroamericanos con mayor peso del sector agropecuario, como Nicaragua, Honduras y Guatemala, presentan las mayores participaciones bioeconómicas. No obstante, esta comparación debe interpretarse con cautela, dado que una menor participación relativa no implica necesariamente un menor potencial de desarrollo bioeconómico, sino que refleja la composición sectorial de cada economía.
+
+## Conclusiones y recomendaciones {#sec-conclusiones}
+
+El presente ejercicio de construcción de una cuenta satélite de bioeconomía para Panamá permite extraer varias conclusiones y plantear recomendaciones para el fortalecimiento de la medición y la política en esta materia.
+
+En primer lugar, los resultados confirman que la bioeconomía, si bien representa una proporción menor del PIB panameño en comparación con otros países de la región, constituye un componente relevante de la estructura productiva nacional. La bioeconomía directa y extendida, en conjunto, representan aproximadamente el `r fmt1(cifra(pct_vab, "Bioeconomía") + cifra(pct_vab, "Bioeconomía extendida"))`% del valor agregado bruto, con una presencia concentrada en la agricultura, la industria alimentaria y las manufacturas basadas en recursos biológicos. Esta participación, aunque modesta en términos relativos, involucra sectores estratégicos para la seguridad alimentaria, el empleo rural y la diversificación productiva del país.
+
+En segundo lugar, la serie temporal `r anio_ini`--`r anio_ref` muestra que la participación bioeconómica se mantiene en un rango acotado, aunque con un comportamiento distinto entre categorías ante un choque como la pandemia de COVID-19: la bioeconomía directa aumentó su participación en el VAB en 2020, mientras que la extendida la redujo. Este hallazgo resulta relevante para la discusión sobre la resiliencia de los modelos productivos basados en la bioeconomía, aunque debe confirmarse con medidas encadenadas de valor, pues las cifras a precios corrientes incorporan efectos de precios.
+
+En tercer lugar, el análisis de las importaciones revela que una proporción significativa de los insumos bioeconómicos utilizados por la economía panameña proviene del exterior, lo que sugiere oportunidades para la sustitución de importaciones y el fortalecimiento de cadenas de valor nacionales basadas en recursos biológicos.
+
+Respecto a las limitaciones del presente ejercicio, es importante señalar que la ausencia de una Matriz de Insumo-Producto actualizada para Panamá restringe el alcance del análisis a la contribución directa de la bioeconomía. En el caso de Ecuador, la disponibilidad de una MIP permitió estimar multiplicadores de demanda y clasificar las actividades económicas según la intensidad de sus encadenamientos bioeconómicos, distinguiendo entre actividades con multiplicadores bioeconómicos muy altos, altos, sobre la mediana y bajo la mediana [@vargas_ecuador_2025]. Este tipo de análisis resulta particularmente valioso para la identificación de sectores con alto potencial de arrastre bioeconómico y para el diseño de políticas de fomento productivo.
+
+En este sentido, se recomienda que las autoridades estadísticas de Panamá prioricen la actualización de la Matriz de Insumo-Producto oficial, lo que permitiría:
+
+1. Estimar la contribución indirecta de la bioeconomía, incluyendo los efectos de encadenamiento hacia atrás y hacia adelante a lo largo de las cadenas productivas.
+
+2. Calcular multiplicadores de demanda bioeconómica, identificando qué actividades generan los mayores efectos multiplicadores cuando aumenta la demanda de productos bioeconómicos [@miller_blair_2009; @vargas_dietzenbacher_2015].
+
+3. Profundizar el análisis de política, al disponer de herramientas cuantitativas que permitan simular escenarios de fomento de la bioeconomía y estimar sus impactos sobre la producción, el empleo y el comercio exterior.
+
+Adicionalmente, se recomienda:
+
+- Actualización periódica de la cuenta satélite de bioeconomía, incorporando los nuevos años de COU conforme estén disponibles, para mantener un monitoreo continuo de la evolución del sector.
+
+- Incorporación de los COU que muestran medidas encadenadas de valor, para determinar el crecimiento real de la bioeconomía.
+
+- Vinculación con cuentas ambientales, siguiendo el marco del Sistema de Contabilidad Ambiental y Económica (SCAE) [@european_commission_system_2013], lo que permitiría analizar la relación entre la bioeconomía y el uso de recursos naturales y servicios ecosistémicos.
+
+- Desarrollo de una estrategia nacional de bioeconomía, que se apoye en la evidencia estadística generada por las cuentas satélite para establecer metas cuantificables y mecanismos de seguimiento, como han hecho otros países de la región.
+
+## Referencias {.unnumbered}
+
+::: {#refs}
+:::

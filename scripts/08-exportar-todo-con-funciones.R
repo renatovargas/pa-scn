@@ -12,7 +12,7 @@ rm(list = ls())
 source("scripts/00-funciones-exportar-Excel.R")
 
 # Cargamos nuestros datos procesados
-pan_scn <- readRDS("salidas/pan_scn.RDS")
+pan_scn <- readRDS("salidas/pan_scn_oficial.RDS")
 
 # Exportamos a Excel
 # ==================
