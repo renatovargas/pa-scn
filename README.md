@@ -32,7 +32,7 @@ Las funciones están en `scripts/00-funciones.R` (procesamiento y validación) y
 - `documentos/`: documento Quarto, bibliografía y plantilla de Word.
 - `salidas/`: base de datos y Excel generados.
 - `scripts/`: código del proceso.
-- `AGENTS.md`: memoria de trabajo con las reglas y decisiones del proyecto.
+
 
 ## Validación
 
