@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Renato Vargas">
+<meta name="author" content="Andrés Mondaini">
+<meta name="author" content="Adrián Rodríguez">
+
+<title>Cuenta de Bioeconomía de Panamá</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="cb-panama_files/libs/clipboard/clipboard.min.js"></script>
+<script src="cb-panama_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="cb-panama_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="cb-panama_files/libs/quarto-html/popper.min.js"></script>
+<script src="cb-panama_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="cb-panama_files/libs/quarto-html/anchor.min.js"></script>
+<link href="cb-panama_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="cb-panama_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="cb-panama_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="cb-panama_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="cb-panama_files/libs/bootstrap/bootstrap-917079515d91bccb85b543faf8aa8bb6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="cb-panama_files/libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+<script src="cb-panama_files/libs/tabwid-1.1.3/tabwid.js"></script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link active" data-scroll-target="#resumen">Resumen</a></li>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción">Introducción</a></li>
+  <li><a href="#sec-metodologia" id="toc-sec-metodologia" class="nav-link" data-scroll-target="#sec-metodologia">Marco conceptual y metodológico</a>
+  <ul class="collapse">
+  <li><a href="#el-sistema-de-cuentas-nacionales-y-los-cuadros-de-oferta-y-utilización" id="toc-el-sistema-de-cuentas-nacionales-y-los-cuadros-de-oferta-y-utilización" class="nav-link" data-scroll-target="#el-sistema-de-cuentas-nacionales-y-los-cuadros-de-oferta-y-utilización">El Sistema de Cuentas Nacionales y los cuadros de oferta y utilización</a></li>
+  <li><a href="#definición-de-bioeconomía" id="toc-definición-de-bioeconomía" class="nav-link" data-scroll-target="#definición-de-bioeconomía">Definición de bioeconomía</a></li>
+  <li><a href="#construcción-de-la-cuenta-satélite" id="toc-construcción-de-la-cuenta-satélite" class="nav-link" data-scroll-target="#construcción-de-la-cuenta-satélite">Construcción de la cuenta satélite</a></li>
+  </ul></li>
+  <li><a href="#sec-resultados" id="toc-sec-resultados" class="nav-link" data-scroll-target="#sec-resultados">Resultados</a>
+  <ul class="collapse">
+  <li><a href="#oferta-bioeconómica" id="toc-oferta-bioeconómica" class="nav-link" data-scroll-target="#oferta-bioeconómica">Oferta bioeconómica</a></li>
+  <li><a href="#utilización-bioeconómica" id="toc-utilización-bioeconómica" class="nav-link" data-scroll-target="#utilización-bioeconómica">Utilización bioeconómica</a></li>
+  <li><a href="#valor-agregado-bruto-y-pib-bioeconómico" id="toc-valor-agregado-bruto-y-pib-bioeconómico" class="nav-link" data-scroll-target="#valor-agregado-bruto-y-pib-bioeconómico">Valor agregado bruto y PIB bioeconómico</a></li>
+  <li><a href="#composición-bioeconómica-de-la-producción-y-el-consumo-intermedio" id="toc-composición-bioeconómica-de-la-producción-y-el-consumo-intermedio" class="nav-link" data-scroll-target="#composición-bioeconómica-de-la-producción-y-el-consumo-intermedio">Composición bioeconómica de la producción y el consumo intermedio</a></li>
+  <li><a href="#importaciones-bioeconómicas" id="toc-importaciones-bioeconómicas" class="nav-link" data-scroll-target="#importaciones-bioeconómicas">Importaciones bioeconómicas</a></li>
+  <li><a href="#impuestos-netos-sobre-productos-bioeconómicos" id="toc-impuestos-netos-sobre-productos-bioeconómicos" class="nav-link" data-scroll-target="#impuestos-netos-sobre-productos-bioeconómicos">Impuestos netos sobre productos bioeconómicos</a></li>
+  <li><a href="#evolución-temporal-20182024" id="toc-evolución-temporal-20182024" class="nav-link" data-scroll-target="#evolución-temporal-20182024">Evolución temporal 2018–2024</a></li>
+  <li><a href="#comparación-regional" id="toc-comparación-regional" class="nav-link" data-scroll-target="#comparación-regional">Comparación regional</a></li>
+  </ul></li>
+  <li><a href="#sec-conclusiones" id="toc-sec-conclusiones" class="nav-link" data-scroll-target="#sec-conclusiones">Conclusiones y recomendaciones</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias">Referencias</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Otros formatos</h2><ul><li><a href="cb-panama.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Cuenta de Bioeconomía de Panamá</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Autores/as</div>
+  <div class="quarto-title-meta-heading">Afiliaciones</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Renato Vargas </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Consultor para CEPAL
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Andrés Mondaini </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            CEPAL
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Adrián Rodríguez </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            CEPAL
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="resumen" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="resumen">Resumen</h2>
+<p>El presente documento describe la construcción de una cuenta satélite de bioeconomía para Panamá, utilizando los Cuadros de Oferta y Utilización (COU) del Sistema de Cuentas Nacionales para el período 2018–2024. A través de una clasificación de productos basada en la Clasificación Central de Productos (CPC), se distingue entre productos de bioeconomía directa, bioeconomía extendida y no bioeconomía. Los resultados para 2024 (cifras provisionales) indican que la bioeconomía directa representa aproximadamente el 8.1% de la producción total del país y cerca del 5.0% del valor agregado bruto, mientras que la bioeconomía extendida aporta un 5.4% adicional a la producción y un 3.9% al valor agregado. La serie temporal 2018–2024 permite observar el comportamiento de los sectores bioeconómicos durante la contracción económica asociada a la pandemia de COVID-19 en 2020 y su posterior recuperación. Estos resultados constituyen una línea base para el seguimiento de la bioeconomía panameña y sientan las bases para análisis más profundos cuando se disponga de una matriz de insumo-producto actualizada.</p>
+<p><strong>Palabras clave:</strong> bioeconomía, cuentas nacionales, cuentas satélite, cuadros de oferta y utilización, Panamá.</p>
+</section>
+<section id="introducción" class="level2">
+<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
+<p>La medición de la bioeconomía se ha posicionado como un tema estratégico para los países de América Latina y el Caribe, pues es una región cuya dotación de recursos naturales y biológicos le confiere ventajas comparativas relevantes para el desarrollo de actividades económicas basadas en la biomasa <span class="citation" data-cites="rodriguez_bioeconomia_2017">(<a href="#ref-rodriguez_bioeconomia_2017" role="doc-biblioref">Rodríguez et&nbsp;al., 2017</a>)</span>. Si bien la bioeconomía abarca un espectro amplio de sectores productivos, su contribución al producto interno bruto (PIB) y al empleo no siempre es visible en las estadísticas macroeconómicas convencionales, lo que dificulta su incorporación en el diseño de políticas públicas.</p>
+<p>En años recientes, la Comisión Económica para América Latina y el Caribe (CEPAL) ha impulsado el desarrollo de cuentas satélite de bioeconomía para diversos países de la región, aplicando una metodología que se apoya en el marco del Sistema de Cuentas Nacionales (SCN) y en las clasificaciones internacionales de productos y actividades económicas <span class="citation" data-cites="vargas_cuenta_2022 vargas_cuentas_2023">(<a href="#ref-vargas_cuenta_2022" role="doc-biblioref">Vargas et&nbsp;al., 2022</a>, <a href="#ref-vargas_cuentas_2023" role="doc-biblioref">2023</a>)</span>. Estos esfuerzos han permitido obtener estimaciones comparables de la contribución de la bioeconomía en trece países latinoamericanos, revelando estructuras productivas heterogéneas que reflejan las particularidades de cada economía nacional.</p>
+<p>Panamá presenta un perfil económico singular en la región. Su economía, fuertemente orientada al sector de servicios; en particular logística, comercio internacional y finanzas, se distingue de las economías vecinas con mayor peso relativo de la agricultura y la manufactura. No obstante, el sector agropecuario, la pesca, la industria alimentaria y otras actividades basadas en recursos biológicos desempeñan un papel significativo en el tejido productivo panameño y en la seguridad alimentaria del país. Cuantificar la dimensión bioeconómica de estas actividades resulta fundamental para una comprensión integral de la estructura productiva nacional.</p>
+<p>El presente documento aplica la metodología de cuentas satélite de bioeconomía al caso de Panamá, utilizando los Cuadros de Oferta y Utilización (COU) del Sistema de Cuentas Nacionales elaborados por el Instituto Nacional de Estadística y Censo (INEC) para el período 2018–2024 <span class="citation" data-cites="inec_panama_cou">(<a href="#ref-inec_panama_cou" role="doc-biblioref">INEC Panamá, 2024</a>)</span>. A diferencia de otros ejercicios realizados para la región, como el caso de Ecuador que incorporó la Matriz de Insumo-Producto en el análisis <span class="citation" data-cites="vargas_ecuador_2025">(<a href="#ref-vargas_ecuador_2025" role="doc-biblioref">Vargas, 2025</a>)</span>, Panamá no cuenta con una Matriz de Insumo Producto (MIP) actualizada, lo que delimita el alcance del análisis a la contribución directa de la bioeconomía sin incluir encadenamientos productivos ni multiplicadores.</p>
+<p>El documento se organiza de la siguiente manera. La <a href="#sec-metodologia" class="quarto-xref">Sección&nbsp;2</a> presenta el marco conceptual y metodológico, incluyendo una breve descripción del SCN, la definición operativa de bioeconomía utilizada y el proceso de clasificación de productos. La <a href="#sec-resultados" class="quarto-xref">Sección&nbsp;3</a> expone los principales resultados para el año 2024 y la evolución temporal del período 2018–2024, así como una comparación con otros países de la región. Finalmente, la <a href="#sec-conclusiones" class="quarto-xref">Sección&nbsp;4</a> ofrece las conclusiones, limitaciones del ejercicio y recomendaciones para futuras actualizaciones.</p>
+</section>
+<section id="sec-metodologia" class="level2">
+<h2 class="anchored" data-anchor-id="sec-metodologia">Marco conceptual y metodológico</h2>
+<section id="el-sistema-de-cuentas-nacionales-y-los-cuadros-de-oferta-y-utilización" class="level3">
+<h3 class="anchored" data-anchor-id="el-sistema-de-cuentas-nacionales-y-los-cuadros-de-oferta-y-utilización">El Sistema de Cuentas Nacionales y los cuadros de oferta y utilización</h3>
+<p>El Sistema de Cuentas Nacionales 2008 <span class="citation" data-cites="comision_europea_scn_2016">(<a href="#ref-comision_europea_scn_2016" role="doc-biblioref">Comisión Europea et&nbsp;al., 2016</a>)</span> constituye el marco estadístico internacional que organiza la información sobre la actividad económica de un país. Dentro de este sistema, los Cuadros de Oferta y Utilización (COU) ocupan un lugar central, ya que integran de manera coherente la información sobre la producción, el consumo intermedio, la demanda final y el valor agregado de una economía.</p>
+<p>El cuadro de oferta describe el origen de los bienes y servicios disponibles en la economía. En sus filas se registran los productos, clasificados según la Clasificación Central de Productos (CPC), y en sus columnas las actividades económicas que los producen, clasificadas según la Clasificación Industrial Internacional Uniforme (CIIU). A estas columnas se suman las importaciones, los impuestos sobre los productos, las subvenciones y los márgenes de distribución. La identidad contable fundamental establece que la oferta total de cada producto es igual a su utilización total.</p>
+<p>El cuadro de utilización, por su parte, muestra el destino de esos bienes y servicios. Su cuerpo principal registra el consumo intermedio. Es decir, los insumos que cada actividad económica adquiere para su proceso productivo. Sus columnas adicionales recogen las exportaciones, el gasto de consumo final y la formación bruta de capital. El valor agregado bruto (VAB) de cada actividad se obtiene como la diferencia entre el valor bruto de su producción a precios básicos y su consumo intermedio:</p>
+<p><span class="math display">
+\text{VAB} = \text{Producción} - \text{Consumo intermedio}
+</span></p>
+<p>El PIB por el lado de la producción se calcula sumando al VAB total los impuestos netos sobre los productos:</p>
+<p><span class="math display">
+\text{PIB} = \sum \text{VAB} + \text{Impuestos sobre productos} - \text{Subvenciones a productos}
+</span></p>
+<p>Para Panamá, los COU utilizados en este ejercicio comprenden 188 productos y 90 actividades económicas (columnas de producción, diferenciadas por condición de mercado) para cada uno de los años del período 2018–2024, a precios corrientes expresados en millones de balboas (B/.), moneda equivalente al dólar estadounidense.</p>
+</section>
+<section id="definición-de-bioeconomía" class="level3">
+<h3 class="anchored" data-anchor-id="definición-de-bioeconomía">Definición de bioeconomía</h3>
+<p>La definición de bioeconomía adoptada en este trabajo sigue la propuesta del Consejo Alemán de Bioeconomía, presentada en la Cumbre Global de Bioeconomía de 2018, que establece que la bioeconomía comprende “la producción, utilización y conservación de recursos biológicos, incluyendo el conocimiento, la ciencia, la tecnología y la innovación relacionados, para proporcionar información, productos, procesos y servicios a todos los sectores económicos, con el propósito de avanzar hacia una economía sostenible” <span class="citation" data-cites="german_bioeconomy_council_2018">(<a href="#ref-german_bioeconomy_council_2018" role="doc-biblioref">German Bioeconomy Council, 2018</a>)</span>.</p>
+<p>Esta definición, ampliamente aceptada en la literatura internacional <span class="citation" data-cites="iacgb_2018 iacgb_2020">(<a href="#ref-iacgb_2018" role="doc-biblioref">IACGB, 2018</a>, <a href="#ref-iacgb_2020" role="doc-biblioref">2020</a>)</span>, permite operacionalizar la medición de la bioeconomía a través de los sistemas de cuentas nacionales, al vincularla con los flujos de productos de origen biológico que circulan en la economía. De acuerdo con el enfoque metodológico desarrollado por <span class="citation" data-cites="vargas_cuenta_2022">Vargas et&nbsp;al. (<a href="#ref-vargas_cuenta_2022" role="doc-biblioref">2022</a>)</span> y ampliado en <span class="citation" data-cites="vargas_cuentas_2023">Vargas et&nbsp;al. (<a href="#ref-vargas_cuentas_2023" role="doc-biblioref">2023</a>)</span>, se distinguen tres categorías de productos:</p>
+<ul>
+<li><p><strong>Bioeconomía:</strong> Productos que son directamente recursos biológicos o cuyo proceso de producción implica la transformación primaria de biomasa (por ejemplo, productos agrícolas, forestales, pesqueros, alimentos procesados, madera aserrada).</p></li>
+<li><p><strong>Bioeconomía extendida:</strong> Productos cuya elaboración requiere insumos biológicos en una proporción significativa, pero que también incluyen un componente cuya fracción no es evidente de productos no biológicos (por ejemplo, productos farmacéuticos de base biológica, textiles de fibras naturales, biocombustibles).</p></li>
+<li><p><strong>No bioeconomía:</strong> Productos cuyo origen y proceso productivo no involucran de manera directa ni significativa recursos biológicos (por ejemplo, productos de minería, manufactura de metales, servicios financieros).</p></li>
+</ul>
+</section>
+<section id="construcción-de-la-cuenta-satélite" class="level3">
+<h3 class="anchored" data-anchor-id="construcción-de-la-cuenta-satélite">Construcción de la cuenta satélite</h3>
+<p>La construcción de la cuenta satélite de bioeconomía para Panamá sigue la metodología documentada en <span class="citation" data-cites="vargas_cuenta_2022">Vargas et&nbsp;al. (<a href="#ref-vargas_cuenta_2022" role="doc-biblioref">2022</a>)</span> y <span class="citation" data-cites="vargas_cuentas_2023">Vargas et&nbsp;al. (<a href="#ref-vargas_cuentas_2023" role="doc-biblioref">2023</a>)</span>, adaptada a las particularidades de la información disponible para el país. El proceso se desarrolló en las siguientes etapas:</p>
+<ol type="1">
+<li><p><strong>Clasificación de productos:</strong> Cada uno de los 188 productos del COU de Panamá, identificados mediante la CPC, fue clasificado en una de las tres categorías bioeconómicas descritas anteriormente. Esta clasificación se realizó mediante un análisis de la naturaleza de cada producto en relación con su contenido de recursos biológicos, siguiendo los criterios establecidos en los trabajos previos para otros países de la región.</p></li>
+<li><p><strong>Reorganización de los COU:</strong> Los cuadros de oferta y utilización fueron reestructurados incorporando la dimensión bioeconómica como una variable adicional de desagregación. Esto permite observar, para cada actividad económica, qué proporción de su producción y de sus insumos corresponde a productos bioeconómicos, de bioeconomía extendida o no bioeconómicos.</p></li>
+<li><p><strong>Cálculo del valor agregado bioeconómico:</strong> El valor agregado asociado a cada categoría bioeconómica se estimó a través del método del consumo intermedio. Este método distribuye el valor agregado de cada actividad económica en proporción a la composición bioeconómica de su producción, considerando la estructura de insumos. El VAB bioeconómico se obtiene como la diferencia entre la producción clasificada como bioeconómica y el consumo intermedio de productos bioeconómicos.</p></li>
+</ol>
+<p>Las series de 2018 a 2024 provienen de la Tabla plana de los cuadros complementarios del INEC, que reúne todos los años con una misma clasificación de actividades (la construcción se desagrega en edificios, obras de ingeniería civil y actividades especializadas) y recoge las revisiones más recientes de las cuentas nacionales. Los datos individuales de la Tabla se ordenaron en los cuadros de oferta, utilización y valor agregado, y se eliminaron los subtotales y totales. Los márgenes de distribución y el ajuste CIF/FOB no vienen en la Tabla, por lo que se recuperaron por la identidad contable de que la oferta total de cada producto es igual a su utilización total. Este procedimiento reproduce celda por celda los COU oficiales de 2022 a 2024. Las cifras de 2024 son provisionales (P).</p>
+<p>Es importante señalar que este enfoque captura únicamente la contribución directa de la bioeconomía. Para estimar la contribución indirecta, que incluye los efectos de encadenamiento productivo y los multiplicadores de demanda, sería necesario contar con una Matriz de Insumo-Producto actualizada, como se realizó en el caso de Ecuador <span class="citation" data-cites="vargas_ecuador_2025 miller_blair_2009">(<a href="#ref-miller_blair_2009" role="doc-biblioref">Miller y Blair, 2009</a>; <a href="#ref-vargas_ecuador_2025" role="doc-biblioref">Vargas, 2025</a>)</span>.</p>
+</section>
+</section>
+<section id="sec-resultados" class="level2">
+<h2 class="anchored" data-anchor-id="sec-resultados">Resultados</h2>
+<section id="oferta-bioeconómica" class="level3">
+<h3 class="anchored" data-anchor-id="oferta-bioeconómica">Oferta bioeconómica</h3>
+<p>La Tabla 1 presenta el valor bruto de producción de Panamá para el año 2024, desagregado por categoría bioeconómica de los productos y por grupo de sectores de actividad económica. La producción se organiza según las secciones de la CIIU, agrupadas en siete grandes categorías.</p>
+<div data-custom-style="Table Caption">
+<p><strong>Tabla 1.</strong> Valor bruto de producción por categoría bioeconómica y grupo de sectores, Panamá 2024 (millones de B/.)</p>
+</div>
+<div class="tabwid"><style>.cl-d8bad469{}.cl-5f1cdd87{font-family:'Aptos';font-size:9pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-ad8c9e99{font-family:'Aptos';font-size:9pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-d066179a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-ea401f91{margin:0;text-align:left;margin-right:auto;writing-mode: vertical-rl;transform: rotate(180deg);-ms-writing-mode:bt-lr;-webkit-writing-mode:vertical-rl;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-f4afa9ce{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c7303543{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-da3d2227{width:1.8in;height:1.25in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7d68d6d2{width:0.65in;height:1.25in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f34e2aeb{width:1.8in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-253e8ff6{width:0.65in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-97ad7f6e{width:1.8in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-ed9c7177{width:0.65in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-441d1c40{width:1.8in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f35e33e4{width:0.65in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-d8bad469"><thead><tr style="overflow-wrap:break-word;"><th class="cl-da3d2227"><p class="cl-d066179a"><span class="cl-5f1cdd87"> </span></p></th><th class="cl-7d68d6d2"><p class="cl-ea401f91"><span class="cl-5f1cdd87">A: Agricultura</span></p></th><th class="cl-7d68d6d2"><p class="cl-ea401f91"><span class="cl-5f1cdd87">B: Minas y canteras</span></p></th><th class="cl-7d68d6d2"><p class="cl-ea401f91"><span class="cl-5f1cdd87">C: Manufactura</span></p></th><th class="cl-7d68d6d2"><p class="cl-ea401f91"><span class="cl-5f1cdd87">D-E: Serv. públicos</span></p></th><th class="cl-7d68d6d2"><p class="cl-ea401f91"><span class="cl-5f1cdd87">F: Construcción</span></p></th><th class="cl-7d68d6d2"><p class="cl-ea401f91"><span class="cl-5f1cdd87">G: Comercio</span></p></th><th class="cl-7d68d6d2"><p class="cl-ea401f91"><span class="cl-5f1cdd87">H-S: Otros servicios</span></p></th><th class="cl-7d68d6d2"><p class="cl-ea401f91"><span class="cl-5f1cdd87">Total</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-f34e2aeb"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">Bioeconomía</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">3,742.7</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">6,203.8</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">1.6</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">313.6</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">67.8</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">10,329.4</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f34e2aeb"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">Bioeconomía extendida</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">1.1</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">733.3</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">2,799.7</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">97.0</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">3,255.9</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">6,887.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-97ad7f6e"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">No bioeconomía</span></p></td><td class="cl-ed9c7177"><p class="cl-c7303543"><span class="cl-ad8c9e99">4.0</span></p></td><td class="cl-ed9c7177"><p class="cl-c7303543"><span class="cl-ad8c9e99">1,737.4</span></p></td><td class="cl-ed9c7177"><p class="cl-c7303543"><span class="cl-ad8c9e99">3,268.1</span></p></td><td class="cl-ed9c7177"><p class="cl-c7303543"><span class="cl-ad8c9e99">160.3</span></p></td><td class="cl-ed9c7177"><p class="cl-c7303543"><span class="cl-ad8c9e99">24,264.2</span></p></td><td class="cl-ed9c7177"><p class="cl-c7303543"><span class="cl-ad8c9e99">23,120.3</span></p></td><td class="cl-ed9c7177"><p class="cl-c7303543"><span class="cl-ad8c9e99">57,615.1</span></p></td><td class="cl-ed9c7177"><p class="cl-c7303543"><span class="cl-ad8c9e99">110,169.4</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-441d1c40"><p class="cl-f4afa9ce"><span class="cl-5f1cdd87">Total</span></p></td><td class="cl-f35e33e4"><p class="cl-c7303543"><span class="cl-5f1cdd87">3,746.6</span></p></td><td class="cl-f35e33e4"><p class="cl-c7303543"><span class="cl-5f1cdd87">1,738.5</span></p></td><td class="cl-f35e33e4"><p class="cl-c7303543"><span class="cl-5f1cdd87">10,205.3</span></p></td><td class="cl-f35e33e4"><p class="cl-c7303543"><span class="cl-5f1cdd87">2,961.6</span></p></td><td class="cl-f35e33e4"><p class="cl-c7303543"><span class="cl-5f1cdd87">24,264.2</span></p></td><td class="cl-f35e33e4"><p class="cl-c7303543"><span class="cl-5f1cdd87">23,530.9</span></p></td><td class="cl-f35e33e4"><p class="cl-c7303543"><span class="cl-5f1cdd87">60,938.8</span></p></td><td class="cl-f35e33e4"><p class="cl-c7303543"><span class="cl-5f1cdd87">127,385.9</span></p></td></tr></tbody></table></div>
+<p><em>Fuente: Elaboración propia con datos del INEC Panamá.</em></p>
+<p>La producción bioeconómica directa se concentra mayoritariamente en el sector agrícola (sección A de la CIIU) y en las industrias manufactureras (sección C), donde se ubican las actividades de procesamiento de alimentos y transformación de recursos naturales. La bioeconomía extendida muestra una presencia significativa en la manufactura, reflejando la utilización de insumos biológicos en procesos de mayor transformación industrial.</p>
+<p>La Tabla 2 completa la oferta total a precios de comprador. A la producción se suman las importaciones, el ajuste CIF/FOB, los impuestos netos sobre los productos (impuestos menos subvenciones) y los márgenes de distribución. El ajuste CIF/FOB corrige la valoración de las importaciones de servicios de transporte y seguros, y los márgenes de distribución solo redistribuyen valor entre productos, por lo que suman cero en el total de la economía.</p>
+<div data-custom-style="Table Caption">
+<p><strong>Tabla 2.</strong> Oferta total a precios de comprador por categoría bioeconómica, Panamá 2024 (millones de B/.)</p>
+</div>
+<div class="tabwid"><style>.cl-d8bad469{}.cl-5f1cdd87{font-family:'Aptos';font-size:9pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-ad8c9e99{font-family:'Aptos';font-size:9pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-d066179a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-981117f6{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-f4afa9ce{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c7303543{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-e02052d3{width:1.871in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2e231fee{width:0.811in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-24b9695a{width:0.987in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-379a0849{width:0.999in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-ab923af2{width:0.745in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-614d3047{width:0.693in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ead4c22{width:0.895in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d6d4de25{width:1.871in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d6ab90e3{width:0.811in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5d9d979c{width:0.987in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-0b6001b1{width:0.999in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-1966b9ca{width:0.745in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5a8c4cb1{width:0.693in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-9ac9e1eb{width:0.895in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8480f89b{width:1.871in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f4a9b3d5{width:0.811in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-edec588f{width:0.987in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-0492d2f9{width:0.999in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-9198f078{width:0.745in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9f1fd16{width:0.693in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-12ace9d8{width:0.895in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-83cbb15a{width:1.871in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f656c175{width:0.811in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-744d770b{width:0.987in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d2d6273d{width:0.999in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-90e164ec{width:0.745in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-6a0afb23{width:0.693in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-99b68d3b{width:0.895in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-d8bad469"><thead><tr style="overflow-wrap:break-word;"><th class="cl-e02052d3"><p class="cl-d066179a"><span class="cl-5f1cdd87"> </span></p></th><th class="cl-2e231fee"><p class="cl-981117f6"><span class="cl-5f1cdd87">Producción</span></p></th><th class="cl-24b9695a"><p class="cl-981117f6"><span class="cl-5f1cdd87">Importaciones</span></p></th><th class="cl-379a0849"><p class="cl-981117f6"><span class="cl-5f1cdd87">Ajuste CIF/FOB</span></p></th><th class="cl-ab923af2"><p class="cl-981117f6"><span class="cl-5f1cdd87">Imp. netos</span></p></th><th class="cl-614d3047"><p class="cl-981117f6"><span class="cl-5f1cdd87">Márgenes</span></p></th><th class="cl-4ead4c22"><p class="cl-981117f6"><span class="cl-5f1cdd87">Oferta total</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-d6d4de25"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">Bioeconomía</span></p></td><td class="cl-d6ab90e3"><p class="cl-c7303543"><span class="cl-ad8c9e99">10,329.4</span></p></td><td class="cl-5d9d979c"><p class="cl-c7303543"><span class="cl-ad8c9e99">3,781.5</span></p></td><td class="cl-0b6001b1"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-1966b9ca"><p class="cl-c7303543"><span class="cl-ad8c9e99">386.3</span></p></td><td class="cl-5a8c4cb1"><p class="cl-c7303543"><span class="cl-ad8c9e99">4,413.0</span></p></td><td class="cl-9ac9e1eb"><p class="cl-c7303543"><span class="cl-ad8c9e99">18,910.2</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d6d4de25"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">Bioeconomía extendida</span></p></td><td class="cl-d6ab90e3"><p class="cl-c7303543"><span class="cl-ad8c9e99">6,887.0</span></p></td><td class="cl-5d9d979c"><p class="cl-c7303543"><span class="cl-ad8c9e99">7,711.9</span></p></td><td class="cl-0b6001b1"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-1966b9ca"><p class="cl-c7303543"><span class="cl-ad8c9e99">137.1</span></p></td><td class="cl-5a8c4cb1"><p class="cl-c7303543"><span class="cl-ad8c9e99">8,834.7</span></p></td><td class="cl-9ac9e1eb"><p class="cl-c7303543"><span class="cl-ad8c9e99">23,570.7</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d6d4de25"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">No bioeconomía</span></p></td><td class="cl-d6ab90e3"><p class="cl-c7303543"><span class="cl-ad8c9e99">110,169.4</span></p></td><td class="cl-5d9d979c"><p class="cl-c7303543"><span class="cl-ad8c9e99">23,000.8</span></p></td><td class="cl-0b6001b1"><p class="cl-c7303543"><span class="cl-ad8c9e99">-1,804.3</span></p></td><td class="cl-1966b9ca"><p class="cl-c7303543"><span class="cl-ad8c9e99">1,677.4</span></p></td><td class="cl-5a8c4cb1"><p class="cl-c7303543"><span class="cl-ad8c9e99">-13,247.7</span></p></td><td class="cl-9ac9e1eb"><p class="cl-c7303543"><span class="cl-ad8c9e99">119,795.7</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d6d4de25"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">Ajuste CIF/FOB</span></p></td><td class="cl-d6ab90e3"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-5d9d979c"><p class="cl-c7303543"><span class="cl-ad8c9e99">-1,804.3</span></p></td><td class="cl-0b6001b1"><p class="cl-c7303543"><span class="cl-ad8c9e99">1,804.3</span></p></td><td class="cl-1966b9ca"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-5a8c4cb1"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-9ac9e1eb"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-8480f89b"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">Compras directas (exterior y territorio)</span></p></td><td class="cl-f4a9b3d5"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-edec588f"><p class="cl-c7303543"><span class="cl-ad8c9e99">1,380.0</span></p></td><td class="cl-0492d2f9"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-9198f078"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-a9f1fd16"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-12ace9d8"><p class="cl-c7303543"><span class="cl-ad8c9e99">1,380.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-83cbb15a"><p class="cl-f4afa9ce"><span class="cl-5f1cdd87">Total</span></p></td><td class="cl-f656c175"><p class="cl-c7303543"><span class="cl-5f1cdd87">127,385.9</span></p></td><td class="cl-744d770b"><p class="cl-c7303543"><span class="cl-5f1cdd87">34,070.0</span></p></td><td class="cl-d2d6273d"><p class="cl-c7303543"><span class="cl-5f1cdd87">0.0</span></p></td><td class="cl-90e164ec"><p class="cl-c7303543"><span class="cl-5f1cdd87">2,200.7</span></p></td><td class="cl-6a0afb23"><p class="cl-c7303543"><span class="cl-5f1cdd87">0.0</span></p></td><td class="cl-99b68d3b"><p class="cl-c7303543"><span class="cl-5f1cdd87">163,656.7</span></p></td></tr></tbody></table></div>
+<p><em>Fuente: Elaboración propia con datos del INEC Panamá.</em></p>
+</section>
+<section id="utilización-bioeconómica" class="level3">
+<h3 class="anchored" data-anchor-id="utilización-bioeconómica">Utilización bioeconómica</h3>
+<p>La Tabla 3 muestra la composición del consumo intermedio por categoría bioeconómica y grupo de sectores de actividad económica para 2024. Este cuadro permite identificar qué sectores de la economía panameña son los principales demandantes de insumos bioeconómicos.</p>
+<div data-custom-style="Table Caption">
+<p><strong>Tabla 3.</strong> Consumo intermedio por categoría bioeconómica y grupo de sectores, Panamá 2024 (millones de B/.)</p>
+</div>
+<div class="tabwid"><style>.cl-d8bad469{}.cl-5f1cdd87{font-family:'Aptos';font-size:9pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-ad8c9e99{font-family:'Aptos';font-size:9pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-d066179a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-ea401f91{margin:0;text-align:left;margin-right:auto;writing-mode: vertical-rl;transform: rotate(180deg);-ms-writing-mode:bt-lr;-webkit-writing-mode:vertical-rl;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-f4afa9ce{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c7303543{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-da3d2227{width:1.8in;height:1.25in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7d68d6d2{width:0.65in;height:1.25in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f34e2aeb{width:1.8in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-253e8ff6{width:0.65in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-97ad7f6e{width:1.8in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-ed9c7177{width:0.65in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-441d1c40{width:1.8in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f35e33e4{width:0.65in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-d8bad469"><thead><tr style="overflow-wrap:break-word;"><th class="cl-da3d2227"><p class="cl-d066179a"><span class="cl-5f1cdd87"> </span></p></th><th class="cl-7d68d6d2"><p class="cl-ea401f91"><span class="cl-5f1cdd87">A: Agricultura</span></p></th><th class="cl-7d68d6d2"><p class="cl-ea401f91"><span class="cl-5f1cdd87">B: Minas y canteras</span></p></th><th class="cl-7d68d6d2"><p class="cl-ea401f91"><span class="cl-5f1cdd87">C: Manufactura</span></p></th><th class="cl-7d68d6d2"><p class="cl-ea401f91"><span class="cl-5f1cdd87">D-E: Serv. públicos</span></p></th><th class="cl-7d68d6d2"><p class="cl-ea401f91"><span class="cl-5f1cdd87">F: Construcción</span></p></th><th class="cl-7d68d6d2"><p class="cl-ea401f91"><span class="cl-5f1cdd87">G: Comercio</span></p></th><th class="cl-7d68d6d2"><p class="cl-ea401f91"><span class="cl-5f1cdd87">H-S: Otros servicios</span></p></th><th class="cl-7d68d6d2"><p class="cl-ea401f91"><span class="cl-5f1cdd87">Total</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-f34e2aeb"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">Bioeconomía</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">720.9</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">40.3</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">3,294.9</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">1.1</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">339.5</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">298.4</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">1,444.6</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">6,139.8</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f34e2aeb"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">Bioeconomía extendida</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">206.1</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">32.7</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">353.3</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">223.4</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">271.3</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">605.2</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">1,870.8</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">3,562.9</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f34e2aeb"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">No bioeconomía</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">442.7</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">678.4</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">2,293.4</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">705.3</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">8,903.6</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">5,981.8</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">14,303.2</span></p></td><td class="cl-253e8ff6"><p class="cl-c7303543"><span class="cl-ad8c9e99">33,308.4</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-97ad7f6e"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">Compras directas (exterior y territorio)</span></p></td><td class="cl-ed9c7177"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-ed9c7177"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-ed9c7177"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-ed9c7177"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-ed9c7177"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-ed9c7177"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-ed9c7177"><p class="cl-c7303543"><span class="cl-ad8c9e99">18.0</span></p></td><td class="cl-ed9c7177"><p class="cl-c7303543"><span class="cl-ad8c9e99">18.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-441d1c40"><p class="cl-f4afa9ce"><span class="cl-5f1cdd87">Total</span></p></td><td class="cl-f35e33e4"><p class="cl-c7303543"><span class="cl-5f1cdd87">1,369.8</span></p></td><td class="cl-f35e33e4"><p class="cl-c7303543"><span class="cl-5f1cdd87">751.4</span></p></td><td class="cl-f35e33e4"><p class="cl-c7303543"><span class="cl-5f1cdd87">5,941.6</span></p></td><td class="cl-f35e33e4"><p class="cl-c7303543"><span class="cl-5f1cdd87">929.8</span></p></td><td class="cl-f35e33e4"><p class="cl-c7303543"><span class="cl-5f1cdd87">9,514.5</span></p></td><td class="cl-f35e33e4"><p class="cl-c7303543"><span class="cl-5f1cdd87">6,885.4</span></p></td><td class="cl-f35e33e4"><p class="cl-c7303543"><span class="cl-5f1cdd87">17,636.5</span></p></td><td class="cl-f35e33e4"><p class="cl-c7303543"><span class="cl-5f1cdd87">43,029.1</span></p></td></tr></tbody></table></div>
+<p><em>Fuente: Elaboración propia con datos del INEC Panamá.</em></p>
+<p>El consumo intermedio de productos bioeconómicos es particularmente relevante en la manufactura y en la agricultura, sectores que demandan volúmenes significativos de materias primas de origen biológico. Los sectores de servicios, aunque dominan la estructura económica panameña en términos de valor agregado, presentan una dependencia comparativamente menor de insumos bioeconómicos.</p>
+<p>La Tabla 4 completa la utilización con los demás usos de los productos: las exportaciones, el gasto de consumo final de los hogares, de las instituciones sin fines de lucro que sirven a los hogares (ISFLSH) y del gobierno, la formación bruta de capital fijo y la variación de existencias. Para cada categoría, la utilización total es igual a la oferta total de la Tabla 2. En la bioeconomía directa, el consumo intermedio absorbe el 32.5% de la utilización total, el consumo final de los hogares el 55.4% y las exportaciones el 8.2%. En la bioeconomía extendida, esos porcentajes son 15.1%, 54.6% y 26.3%, respectivamente.</p>
+<div data-custom-style="Table Caption">
+<p><strong>Tabla 4.</strong> Utilización total por categoría bioeconómica y tipo de uso, Panamá 2024 (millones de B/.)</p>
+</div>
+<div class="tabwid"><style>.cl-d8bad469{}.cl-5f1cdd87{font-family:'Aptos';font-size:9pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-ad8c9e99{font-family:'Aptos';font-size:9pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-d066179a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-981117f6{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-f4afa9ce{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c7303543{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-48d6ff9b{width:1.121in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-9b3911b9{width:0.747in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f1331907{width:0.591in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b4f3c527{width:0.832in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-748c2260{width:0.797in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2e35d423{width:0.867in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-9ba3a3d6{width:0.395in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8111484f{width:0.938in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c515e732{width:0.712in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dbf5e20e{width:1.121in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-9c828d21{width:0.747in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4cf9d76c{width:0.591in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cc817703{width:0.832in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-0ec14151{width:0.797in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-09ee16ea{width:0.867in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-35f917c7{width:0.395in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4c6963e5{width:0.938in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-089fcfd9{width:0.712in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-827da55a{width:1.121in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-1fd552d1{width:0.747in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-36e2f336{width:0.591in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b11ee33a{width:0.832in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-97c5b09c{width:0.797in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-1e0bf6a0{width:0.867in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-51f2caf7{width:0.395in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b656a915{width:0.938in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4e2cc318{width:0.712in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-79200568{width:1.121in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-502b88e8{width:0.747in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8c3f21f5{width:0.591in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-91272491{width:0.832in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e0302e46{width:0.797in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f6b708fa{width:0.867in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05f81e9a{width:0.395in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e923f4cb{width:0.938in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e325d2ee{width:0.712in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-d8bad469"><thead><tr style="overflow-wrap:break-word;"><th class="cl-48d6ff9b"><p class="cl-d066179a"><span class="cl-5f1cdd87"> </span></p></th><th class="cl-9b3911b9"><p class="cl-981117f6"><span class="cl-5f1cdd87">Consumo intermedio</span></p></th><th class="cl-f1331907"><p class="cl-981117f6"><span class="cl-5f1cdd87">Exportaciones</span></p></th><th class="cl-b4f3c527"><p class="cl-981117f6"><span class="cl-5f1cdd87">Consumo final hogares</span></p></th><th class="cl-748c2260"><p class="cl-981117f6"><span class="cl-5f1cdd87">Consumo final ISFLSH</span></p></th><th class="cl-2e35d423"><p class="cl-981117f6"><span class="cl-5f1cdd87">Consumo final gobierno</span></p></th><th class="cl-9ba3a3d6"><p class="cl-981117f6"><span class="cl-5f1cdd87">FBKF</span></p></th><th class="cl-8111484f"><p class="cl-981117f6"><span class="cl-5f1cdd87">Variación de existencias</span></p></th><th class="cl-c515e732"><p class="cl-981117f6"><span class="cl-5f1cdd87">Utilización total</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-dbf5e20e"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">Bioeconomía</span></p></td><td class="cl-9c828d21"><p class="cl-c7303543"><span class="cl-ad8c9e99">6,139.8</span></p></td><td class="cl-4cf9d76c"><p class="cl-c7303543"><span class="cl-ad8c9e99">1,553.4</span></p></td><td class="cl-cc817703"><p class="cl-c7303543"><span class="cl-ad8c9e99">10,469.7</span></p></td><td class="cl-0ec14151"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-09ee16ea"><p class="cl-c7303543"><span class="cl-ad8c9e99">44.5</span></p></td><td class="cl-35f917c7"><p class="cl-c7303543"><span class="cl-ad8c9e99">215.3</span></p></td><td class="cl-4c6963e5"><p class="cl-c7303543"><span class="cl-ad8c9e99">487.5</span></p></td><td class="cl-089fcfd9"><p class="cl-c7303543"><span class="cl-ad8c9e99">18,910.2</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dbf5e20e"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">Bioeconomía extendida</span></p></td><td class="cl-9c828d21"><p class="cl-c7303543"><span class="cl-ad8c9e99">3,562.9</span></p></td><td class="cl-4cf9d76c"><p class="cl-c7303543"><span class="cl-ad8c9e99">6,194.3</span></p></td><td class="cl-cc817703"><p class="cl-c7303543"><span class="cl-ad8c9e99">12,867.7</span></p></td><td class="cl-0ec14151"><p class="cl-c7303543"><span class="cl-ad8c9e99">29.5</span></p></td><td class="cl-09ee16ea"><p class="cl-c7303543"><span class="cl-ad8c9e99">248.5</span></p></td><td class="cl-35f917c7"><p class="cl-c7303543"><span class="cl-ad8c9e99">159.7</span></p></td><td class="cl-4c6963e5"><p class="cl-c7303543"><span class="cl-ad8c9e99">508.0</span></p></td><td class="cl-089fcfd9"><p class="cl-c7303543"><span class="cl-ad8c9e99">23,570.7</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dbf5e20e"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">No bioeconomía</span></p></td><td class="cl-9c828d21"><p class="cl-c7303543"><span class="cl-ad8c9e99">33,308.4</span></p></td><td class="cl-4cf9d76c"><p class="cl-c7303543"><span class="cl-ad8c9e99">25,033.3</span></p></td><td class="cl-cc817703"><p class="cl-c7303543"><span class="cl-ad8c9e99">22,958.4</span></p></td><td class="cl-0ec14151"><p class="cl-c7303543"><span class="cl-ad8c9e99">67.3</span></p></td><td class="cl-09ee16ea"><p class="cl-c7303543"><span class="cl-ad8c9e99">10,348.7</span></p></td><td class="cl-35f917c7"><p class="cl-c7303543"><span class="cl-ad8c9e99">26,784.1</span></p></td><td class="cl-4c6963e5"><p class="cl-c7303543"><span class="cl-ad8c9e99">1,295.5</span></p></td><td class="cl-089fcfd9"><p class="cl-c7303543"><span class="cl-ad8c9e99">119,795.7</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-827da55a"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">Compras directas (exterior y territorio)</span></p></td><td class="cl-1fd552d1"><p class="cl-c7303543"><span class="cl-ad8c9e99">18.0</span></p></td><td class="cl-36e2f336"><p class="cl-c7303543"><span class="cl-ad8c9e99">5,752.1</span></p></td><td class="cl-b11ee33a"><p class="cl-c7303543"><span class="cl-ad8c9e99">-4,390.0</span></p></td><td class="cl-97c5b09c"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-1e0bf6a0"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-51f2caf7"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-b656a915"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-4e2cc318"><p class="cl-c7303543"><span class="cl-ad8c9e99">1,380.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-79200568"><p class="cl-f4afa9ce"><span class="cl-5f1cdd87">Total</span></p></td><td class="cl-502b88e8"><p class="cl-c7303543"><span class="cl-5f1cdd87">43,029.1</span></p></td><td class="cl-8c3f21f5"><p class="cl-c7303543"><span class="cl-5f1cdd87">38,533.0</span></p></td><td class="cl-91272491"><p class="cl-c7303543"><span class="cl-5f1cdd87">41,905.8</span></p></td><td class="cl-e0302e46"><p class="cl-c7303543"><span class="cl-5f1cdd87">96.8</span></p></td><td class="cl-f6b708fa"><p class="cl-c7303543"><span class="cl-5f1cdd87">10,641.8</span></p></td><td class="cl-05f81e9a"><p class="cl-c7303543"><span class="cl-5f1cdd87">27,159.2</span></p></td><td class="cl-e923f4cb"><p class="cl-c7303543"><span class="cl-5f1cdd87">2,291.0</span></p></td><td class="cl-e325d2ee"><p class="cl-c7303543"><span class="cl-5f1cdd87">163,656.7</span></p></td></tr></tbody></table></div>
+<p><em>Fuente: Elaboración propia con datos del INEC Panamá. FBKF: formación bruta de capital fijo.</em></p>
+</section>
+<section id="valor-agregado-bruto-y-pib-bioeconómico" class="level3">
+<h3 class="anchored" data-anchor-id="valor-agregado-bruto-y-pib-bioeconómico">Valor agregado bruto y PIB bioeconómico</h3>
+<p>A partir de los cuadros de oferta y utilización, es posible calcular el valor agregado bruto (VAB) asociado a cada categoría bioeconómica. La Tabla 5 presenta esta descomposición para 2024, junto con la contribución porcentual de cada categoría.</p>
+<div data-custom-style="Table Caption">
+<p><strong>Tabla 5.</strong> Valor agregado bruto por categoría bioeconómica, Panamá 2024 (millones de B/.)</p>
+</div>
+<div class="tabwid"><style>.cl-d8bad469{}.cl-5f1cdd87{font-family:'Aptos';font-size:9pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-ad8c9e99{font-family:'Aptos';font-size:9pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-d066179a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-981117f6{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-f4afa9ce{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c7303543{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-479ad71e{width:2.03in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-6eb271eb{width:0.879in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-65743ecf{width:1.353in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f80fba29{width:0.716in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-9834a4b1{width:0.971in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8d9ab81{width:0.525in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7de132f3{width:2.03in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d0feeee8{width:0.879in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-02101d78{width:1.353in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8f608390{width:0.716in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-6c4c4029{width:0.971in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-48e5e455{width:0.525in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d7878367{width:2.03in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-68ba212f{width:0.879in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f1aa448b{width:1.353in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-45d50387{width:0.716in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5f52d85c{width:0.971in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-1a652c03{width:0.525in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-db27d2fa{width:2.03in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-746af8c7{width:0.879in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b2f0783f{width:1.353in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dca26445{width:0.716in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-57b8d39b{width:0.971in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-b2e7132f{width:0.525in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-d8bad469"><thead><tr style="overflow-wrap:break-word;"><th class="cl-479ad71e"><p class="cl-d066179a"><span class="cl-5f1cdd87"> </span></p></th><th class="cl-6eb271eb"><p class="cl-981117f6"><span class="cl-5f1cdd87">Producción</span></p></th><th class="cl-65743ecf"><p class="cl-981117f6"><span class="cl-5f1cdd87">Consumo intermedio</span></p></th><th class="cl-f80fba29"><p class="cl-981117f6"><span class="cl-5f1cdd87">VAB</span></p></th><th class="cl-9834a4b1"><p class="cl-981117f6"><span class="cl-5f1cdd87">% Producción</span></p></th><th class="cl-f8d9ab81"><p class="cl-981117f6"><span class="cl-5f1cdd87">% CI</span></p></th><th class="cl-f8d9ab81"><p class="cl-981117f6"><span class="cl-5f1cdd87">% VAB</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-7de132f3"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">Bioeconomía</span></p></td><td class="cl-d0feeee8"><p class="cl-c7303543"><span class="cl-ad8c9e99">10,329.4</span></p></td><td class="cl-02101d78"><p class="cl-c7303543"><span class="cl-ad8c9e99">6,139.8</span></p></td><td class="cl-8f608390"><p class="cl-c7303543"><span class="cl-ad8c9e99">4,189.6</span></p></td><td class="cl-6c4c4029"><p class="cl-c7303543"><span class="cl-ad8c9e99">8.1</span></p></td><td class="cl-48e5e455"><p class="cl-c7303543"><span class="cl-ad8c9e99">14.3</span></p></td><td class="cl-48e5e455"><p class="cl-c7303543"><span class="cl-ad8c9e99">5.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-7de132f3"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">Bioeconomía extendida</span></p></td><td class="cl-d0feeee8"><p class="cl-c7303543"><span class="cl-ad8c9e99">6,887.0</span></p></td><td class="cl-02101d78"><p class="cl-c7303543"><span class="cl-ad8c9e99">3,562.9</span></p></td><td class="cl-8f608390"><p class="cl-c7303543"><span class="cl-ad8c9e99">3,324.1</span></p></td><td class="cl-6c4c4029"><p class="cl-c7303543"><span class="cl-ad8c9e99">5.4</span></p></td><td class="cl-48e5e455"><p class="cl-c7303543"><span class="cl-ad8c9e99">8.3</span></p></td><td class="cl-48e5e455"><p class="cl-c7303543"><span class="cl-ad8c9e99">3.9</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-7de132f3"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">No bioeconomía</span></p></td><td class="cl-d0feeee8"><p class="cl-c7303543"><span class="cl-ad8c9e99">110,169.4</span></p></td><td class="cl-02101d78"><p class="cl-c7303543"><span class="cl-ad8c9e99">33,308.4</span></p></td><td class="cl-8f608390"><p class="cl-c7303543"><span class="cl-ad8c9e99">76,861.1</span></p></td><td class="cl-6c4c4029"><p class="cl-c7303543"><span class="cl-ad8c9e99">86.5</span></p></td><td class="cl-48e5e455"><p class="cl-c7303543"><span class="cl-ad8c9e99">77.4</span></p></td><td class="cl-48e5e455"><p class="cl-c7303543"><span class="cl-ad8c9e99">91.1</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-d7878367"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">Compras directas (exterior y territorio)</span></p></td><td class="cl-68ba212f"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-f1aa448b"><p class="cl-c7303543"><span class="cl-ad8c9e99">18.0</span></p></td><td class="cl-45d50387"><p class="cl-c7303543"><span class="cl-ad8c9e99">-18.0</span></p></td><td class="cl-5f52d85c"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-1a652c03"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td><td class="cl-1a652c03"><p class="cl-c7303543"><span class="cl-ad8c9e99">0.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-db27d2fa"><p class="cl-f4afa9ce"><span class="cl-5f1cdd87">Total</span></p></td><td class="cl-746af8c7"><p class="cl-c7303543"><span class="cl-5f1cdd87">127,385.9</span></p></td><td class="cl-b2f0783f"><p class="cl-c7303543"><span class="cl-5f1cdd87">43,029.1</span></p></td><td class="cl-dca26445"><p class="cl-c7303543"><span class="cl-5f1cdd87">84,356.8</span></p></td><td class="cl-57b8d39b"><p class="cl-c7303543"><span class="cl-5f1cdd87">100.0</span></p></td><td class="cl-b2e7132f"><p class="cl-c7303543"><span class="cl-5f1cdd87">100.0</span></p></td><td class="cl-b2e7132f"><p class="cl-c7303543"><span class="cl-5f1cdd87">100.0</span></p></td></tr></tbody></table></div>
+<p><em>Fuente: Elaboración propia con datos del INEC Panamá.</em></p>
+<p>Los resultados revelan que la bioeconomía directa contribuye con aproximadamente el 5.0% del VAB total de Panamá, mientras que la bioeconomía extendida aporta alrededor del 3.9% adicional. En conjunto, las actividades asociadas a la bioeconomía representan cerca del 8.9% del valor agregado bruto de la economía panameña. Si bien esta proporción es menor que la observada en economías con mayor peso relativo del sector primario, como Nicaragua o Honduras, donde supera el 25% <span class="citation" data-cites="vargas_cuentas_2023">(<a href="#ref-vargas_cuentas_2023" role="doc-biblioref">Vargas et&nbsp;al., 2023</a>)</span>, refleja la estructura terciaria predominante de la economía de Panamá.</p>
+</section>
+<section id="composición-bioeconómica-de-la-producción-y-el-consumo-intermedio" class="level3">
+<h3 class="anchored" data-anchor-id="composición-bioeconómica-de-la-producción-y-el-consumo-intermedio">Composición bioeconómica de la producción y el consumo intermedio</h3>
+<p>La Figura 1 muestra la composición bioeconómica de la producción bruta por grupo de sectores de actividad económica (secciones de la CIIU agrupadas) para 2024. Este gráfico permite visualizar en qué medida cada grupo de sectores depende de la producción de bienes de origen biológico.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cb-panama_files/figure-html/figura-produccion-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<div data-custom-style="Image Caption">
+<p><strong>Figura 1.</strong> Composición bioeconómica de la producción por grupo de sectores, Panamá 2024</p>
+</div>
+<p>El sector agrícola (A) presenta la mayor proporción de producción bioeconómica, como cabría esperar dada la naturaleza de sus actividades. Las industrias manufactureras (C) muestran una composición mixta, con presencia de bioeconomía y bioeconomía extendida significativas, reflejando las cadenas de transformación de alimentos y otros productos de origen biológico. Los sectores de servicios presentan proporciones bajas de producción bioeconómica.</p>
+<p>El 60.8% de la producción de las industrias manufactureras (sección C) en 2024 corresponde a productos de bioeconomía directa y un 7.2% adicional a bioeconomía extendida. Esta participación elevada no es una característica de toda la manufactura, sino el resultado de un grupo pequeño de actividades agroindustriales. La Tabla 6 muestra las seis actividades con mayor producción bioeconómica: en todas ellas, entre el 87.7% y el 99.5% de la producción corresponde a productos de bioeconomía directa, y en conjunto concentran el 89.1% de la producción bioeconómica de la manufactura.</p>
+<div data-custom-style="Table Caption">
+<p><strong>Tabla 6.</strong> Actividades manufactureras con mayor producción de bioeconomía directa, Panamá 2024 (millones de B/.)</p>
+</div>
+<div class="tabwid"><style>.cl-d8bad469{}.cl-5f1cdd87{font-family:'Aptos';font-size:9pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-ad8c9e99{font-family:'Aptos';font-size:9pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-d066179a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-981117f6{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-f4afa9ce{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c7303543{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-1a2d48e8{width:3.164in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-651c49ff{width:0.866in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-9e7c2af1{width:1.136in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-50cf6c79{width:0.731in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-97b2a9af{width:1.104in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-42a24ad5{width:3.164in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-0e0e2f6d{width:0.866in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8a5f529d{width:1.136in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2d3ddc33{width:0.731in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5e5a7edb{width:1.104in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c80614dd{width:3.164in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d0cf9ce4{width:0.866in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bb71da09{width:1.136in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-27a7c476{width:0.731in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-60e5a5ed{width:1.104in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-d8bad469"><thead><tr style="overflow-wrap:break-word;"><th class="cl-1a2d48e8"><p class="cl-d066179a"><span class="cl-5f1cdd87">Actividad</span></p></th><th class="cl-651c49ff"><p class="cl-981117f6"><span class="cl-5f1cdd87">Producción total</span></p></th><th class="cl-9e7c2af1"><p class="cl-981117f6"><span class="cl-5f1cdd87">Producción bioeconomía</span></p></th><th class="cl-50cf6c79"><p class="cl-981117f6"><span class="cl-5f1cdd87">% bioeconomía</span></p></th><th class="cl-97b2a9af"><p class="cl-981117f6"><span class="cl-5f1cdd87">% de la manufactura bio</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-42a24ad5"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">14.1 Procesamiento y conservación de carne</span></p></td><td class="cl-0e0e2f6d"><p class="cl-c7303543"><span class="cl-ad8c9e99">2,209.2</span></p></td><td class="cl-8a5f529d"><p class="cl-c7303543"><span class="cl-ad8c9e99">2,167.0</span></p></td><td class="cl-2d3ddc33"><p class="cl-c7303543"><span class="cl-ad8c9e99">98.1</span></p></td><td class="cl-5e5a7edb"><p class="cl-c7303543"><span class="cl-ad8c9e99">34.9</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-42a24ad5"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">19.2 Elaboración de otros productos alimenticios</span></p></td><td class="cl-0e0e2f6d"><p class="cl-c7303543"><span class="cl-ad8c9e99">1,063.1</span></p></td><td class="cl-8a5f529d"><p class="cl-c7303543"><span class="cl-ad8c9e99">1,012.0</span></p></td><td class="cl-2d3ddc33"><p class="cl-c7303543"><span class="cl-ad8c9e99">95.2</span></p></td><td class="cl-5e5a7edb"><p class="cl-c7303543"><span class="cl-ad8c9e99">16.3</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-42a24ad5"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">19.1 Elaboración de productos de molinería, almidones y productos derivados del almidón</span></p></td><td class="cl-0e0e2f6d"><p class="cl-c7303543"><span class="cl-ad8c9e99">955.3</span></p></td><td class="cl-8a5f529d"><p class="cl-c7303543"><span class="cl-ad8c9e99">950.3</span></p></td><td class="cl-2d3ddc33"><p class="cl-c7303543"><span class="cl-ad8c9e99">99.5</span></p></td><td class="cl-5e5a7edb"><p class="cl-c7303543"><span class="cl-ad8c9e99">15.3</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-42a24ad5"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">15.1 Procesamiento y conservación de pescado, crustáceos y moluscos</span></p></td><td class="cl-0e0e2f6d"><p class="cl-c7303543"><span class="cl-ad8c9e99">595.7</span></p></td><td class="cl-8a5f529d"><p class="cl-c7303543"><span class="cl-ad8c9e99">592.6</span></p></td><td class="cl-2d3ddc33"><p class="cl-c7303543"><span class="cl-ad8c9e99">99.5</span></p></td><td class="cl-5e5a7edb"><p class="cl-c7303543"><span class="cl-ad8c9e99">9.6</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-42a24ad5"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">20.1 Elaboración de bebidas y tabaco</span></p></td><td class="cl-0e0e2f6d"><p class="cl-c7303543"><span class="cl-ad8c9e99">488.5</span></p></td><td class="cl-8a5f529d"><p class="cl-c7303543"><span class="cl-ad8c9e99">451.8</span></p></td><td class="cl-2d3ddc33"><p class="cl-c7303543"><span class="cl-ad8c9e99">92.5</span></p></td><td class="cl-5e5a7edb"><p class="cl-c7303543"><span class="cl-ad8c9e99">7.3</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c80614dd"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">18.1 Elaboración de productos lácteos</span></p></td><td class="cl-d0cf9ce4"><p class="cl-c7303543"><span class="cl-ad8c9e99">404.0</span></p></td><td class="cl-bb71da09"><p class="cl-c7303543"><span class="cl-ad8c9e99">354.4</span></p></td><td class="cl-27a7c476"><p class="cl-c7303543"><span class="cl-ad8c9e99">87.7</span></p></td><td class="cl-60e5a5ed"><p class="cl-c7303543"><span class="cl-ad8c9e99">5.7</span></p></td></tr></tbody></table></div>
+<p><em>Fuente: Elaboración propia con datos del INEC Panamá.</em></p>
+<p>La actividad con mayor peso es el procesamiento y conservación de carne, que por sí sola aporta el 34.9% de la producción bioeconómica manufacturera, seguida de la elaboración de otros productos alimenticios (16.3%) y de la molinería y los productos derivados del almidón (15.3%). Por producto, destacan la carne de aves de corral (12.3% de la producción bioeconómica manufacturera), el arroz sin cáscara (10.3%), el pescado y los crustáceos preparados o en conserva (9.2%) y las carnes de ganado bovino (8.4%) y porcino (7.6%). Las demás actividades manufactureras juntas producen 4,489.5 millones de B/., de los cuales solo el 15.1% es bioeconomía directa. Entre las de mayor tamaño de este grupo, la fabricación de otros productos minerales no metálicos, de cemento, cal y yeso, de sustancias y productos químicos, y la reparación y el mantenimiento de maquinaria no tienen producción bioeconómica relevante.</p>
+<p>Dos conclusiones se desprenden de este resultado. Primero, la bioeconomía manufacturera de Panamá es, en la práctica, agroindustria alimentaria: carne, molinería y arroz, pescado, bebidas y lácteos. Segundo, la medición para la sección C depende de la clasificación de pocos productos: de los 69 productos manufacturados clasificados como bioeconomía directa, los cinco principales concentran el 47.8% de esa producción, por lo que cualquier cambio en su tratamiento tendría un efecto apreciable sobre el total bioeconómico.</p>
+<p>La Figura 2 muestra una perspectiva complementaria desde el lado de la demanda de insumos. La composición bioeconómica del consumo intermedio revela qué sectores son los principales usuarios de materias primas e insumos de origen biológico.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cb-panama_files/figure-html/figura-ci-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<div data-custom-style="Image Caption">
+<p><strong>Figura 2.</strong> Composición bioeconómica del consumo intermedio por grupo de sectores, Panamá 2024</p>
+</div>
+</section>
+<section id="importaciones-bioeconómicas" class="level3">
+<h3 class="anchored" data-anchor-id="importaciones-bioeconómicas">Importaciones bioeconómicas</h3>
+<p>El comercio exterior constituye un canal relevante de transmisión de la bioeconomía. La Figura 3 presenta la composición bioeconómica de las importaciones de Panamá en 2024.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cb-panama_files/figure-html/figura-importaciones-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div data-custom-style="Image Caption">
+<p><strong>Figura 3.</strong> Composición bioeconómica de las importaciones, Panamá 2024 (millones de B/.)</p>
+</div>
+<p>Las importaciones de productos bioeconómicos y de bioeconomía extendida representan una proporción notable de las importaciones totales, lo que refleja la inserción de Panamá en cadenas globales de valor donde los insumos de origen biológico desempeñan un papel relevante. La bioeconomía extendida muestra un peso particularmente alto en las importaciones, reflejando la demanda de productos semi-procesados de origen biológico.</p>
+</section>
+<section id="impuestos-netos-sobre-productos-bioeconómicos" class="level3">
+<h3 class="anchored" data-anchor-id="impuestos-netos-sobre-productos-bioeconómicos">Impuestos netos sobre productos bioeconómicos</h3>
+<p>La estructura tributaria aplicada a los productos también presenta diferencias según su clasificación bioeconómica. La Tabla 7 muestra los impuestos netos sobre productos (impuestos menos subvenciones) para cada categoría en 2024, junto con la tasa impositiva implícita, calculada como el cociente entre los impuestos netos y el valor de producción.</p>
+<div data-custom-style="Table Caption">
+<p><strong>Tabla 7.</strong> Impuestos netos y tasa impositiva implícita por categoría bioeconómica, Panamá 2024</p>
+</div>
+<div class="tabwid"><style>.cl-d8bad469{}.cl-5f1cdd87{font-family:'Aptos';font-size:9pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-ad8c9e99{font-family:'Aptos';font-size:9pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-d066179a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-981117f6{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-f4afa9ce{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c7303543{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-f6933422{width:1.652in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-1afc4e64{width:2.082in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7f69a709{width:1.737in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-ac398416{width:1.53in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-65b7696c{width:1.652in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-fca4353c{width:2.082in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-89588ea9{width:1.737in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d74f5602{width:1.53in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f2906db9{width:1.652in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-359ca9c8{width:2.082in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-12dfc078{width:1.737in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-ffc256b6{width:1.53in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-9e61135e{width:1.652in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-cc1307a6{width:2.082in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-d48889ce{width:1.737in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8482ea47{width:1.53in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-d8bad469"><thead><tr style="overflow-wrap:break-word;"><th class="cl-f6933422"><p class="cl-d066179a"><span class="cl-5f1cdd87"> </span></p></th><th class="cl-1afc4e64"><p class="cl-981117f6"><span class="cl-5f1cdd87">Impuestos netos (mill. B/.)</span></p></th><th class="cl-7f69a709"><p class="cl-981117f6"><span class="cl-5f1cdd87">Producción (mill. B/.)</span></p></th><th class="cl-ac398416"><p class="cl-981117f6"><span class="cl-5f1cdd87">Tasa implícita (%)</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-65b7696c"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">Bioeconomía</span></p></td><td class="cl-fca4353c"><p class="cl-c7303543"><span class="cl-ad8c9e99">386.3</span></p></td><td class="cl-89588ea9"><p class="cl-c7303543"><span class="cl-ad8c9e99">10,329.4</span></p></td><td class="cl-d74f5602"><p class="cl-c7303543"><span class="cl-ad8c9e99">3.74</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-65b7696c"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">Bioeconomía extendida</span></p></td><td class="cl-fca4353c"><p class="cl-c7303543"><span class="cl-ad8c9e99">137.1</span></p></td><td class="cl-89588ea9"><p class="cl-c7303543"><span class="cl-ad8c9e99">6,887.0</span></p></td><td class="cl-d74f5602"><p class="cl-c7303543"><span class="cl-ad8c9e99">1.99</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f2906db9"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">No bioeconomía</span></p></td><td class="cl-359ca9c8"><p class="cl-c7303543"><span class="cl-ad8c9e99">1,677.4</span></p></td><td class="cl-12dfc078"><p class="cl-c7303543"><span class="cl-ad8c9e99">110,169.4</span></p></td><td class="cl-ffc256b6"><p class="cl-c7303543"><span class="cl-ad8c9e99">1.52</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-9e61135e"><p class="cl-f4afa9ce"><span class="cl-5f1cdd87">Total</span></p></td><td class="cl-cc1307a6"><p class="cl-c7303543"><span class="cl-5f1cdd87">2,200.7</span></p></td><td class="cl-d48889ce"><p class="cl-c7303543"><span class="cl-5f1cdd87">127,385.9</span></p></td><td class="cl-8482ea47"><p class="cl-c7303543"><span class="cl-5f1cdd87">1.73</span></p></td></tr></tbody></table></div>
+<p><em>Fuente: Elaboración propia con datos del INEC Panamá.</em></p>
+<p>La tasa impositiva implícita permite comparar la carga tributaria relativa entre categorías bioeconómicas. Las diferencias observadas reflejan tanto la estructura de impuestos sobre productos específicos como las exenciones o tratamientos fiscales diferenciados que puedan existir para determinados bienes de origen biológico.</p>
+</section>
+<section id="evolución-temporal-20182024" class="level3">
+<h3 class="anchored" data-anchor-id="evolución-temporal-20182024">Evolución temporal 2018–2024</h3>
+<p>La disponibilidad de datos para siete años consecutivos permite analizar la dinámica de la bioeconomía panameña en el tiempo, período que incluye el impacto de la pandemia de COVID-19 en 2020 y la posterior recuperación económica. La Tabla 8 presenta la evolución de la participación de cada categoría bioeconómica en la producción total, el consumo intermedio y el valor agregado bruto.</p>
+<div data-custom-style="Table Caption">
+<p><strong>Tabla 8.</strong> Participación porcentual de la bioeconomía en agregados macroeconómicos, Panamá 2018–2024</p>
+</div>
+<div class="tabwid"><style>.cl-d8bad469{}.cl-5f1cdd87{font-family:'Aptos';font-size:9pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-ad8c9e99{font-family:'Aptos';font-size:9pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-d066179a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-981117f6{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-f4afa9ce{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c7303543{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2pt;padding-top:2pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-b5673508{width:2.508in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f3475459{width:0.642in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-0f5b0f5c{width:2.508in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-01e2598e{width:0.642in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-6c542bfb{width:2.508in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-32288b88{width:0.642in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-d8bad469"><thead><tr style="overflow-wrap:break-word;"><th class="cl-b5673508"><p class="cl-d066179a"><span class="cl-5f1cdd87"> </span></p></th><th class="cl-f3475459"><p class="cl-981117f6"><span class="cl-5f1cdd87">2018</span></p></th><th class="cl-f3475459"><p class="cl-981117f6"><span class="cl-5f1cdd87">2019</span></p></th><th class="cl-f3475459"><p class="cl-981117f6"><span class="cl-5f1cdd87">2020</span></p></th><th class="cl-f3475459"><p class="cl-981117f6"><span class="cl-5f1cdd87">2021</span></p></th><th class="cl-f3475459"><p class="cl-981117f6"><span class="cl-5f1cdd87">2022</span></p></th><th class="cl-f3475459"><p class="cl-981117f6"><span class="cl-5f1cdd87">2023</span></p></th><th class="cl-f3475459"><p class="cl-981117f6"><span class="cl-5f1cdd87">2024</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-0f5b0f5c"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">Producción: Bioeconomía</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">7.8</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">7.8</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">9.6</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">8.9</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">8.4</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">7.8</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">8.1</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-0f5b0f5c"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">Producción: Bioeconomía extendida</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">6.1</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">6.2</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">5.3</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">5.1</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">5.1</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">5.2</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">5.4</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-0f5b0f5c"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">CI: Bioeconomía</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">14.0</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">14.4</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">16.1</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">15.4</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">14.8</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">13.9</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">14.3</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-0f5b0f5c"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">CI: Bioeconomía extendida</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">8.1</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">8.3</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">9.2</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">8.5</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">7.9</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">8.3</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">8.3</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-0f5b0f5c"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">VAB: Bioeconomía</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">4.1</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">4.2</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">6.5</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">5.6</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">5.1</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">4.7</span></p></td><td class="cl-01e2598e"><p class="cl-c7303543"><span class="cl-ad8c9e99">5.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-6c542bfb"><p class="cl-f4afa9ce"><span class="cl-ad8c9e99">VAB: Bioeconomía extendida</span></p></td><td class="cl-32288b88"><p class="cl-c7303543"><span class="cl-ad8c9e99">4.9</span></p></td><td class="cl-32288b88"><p class="cl-c7303543"><span class="cl-ad8c9e99">5.1</span></p></td><td class="cl-32288b88"><p class="cl-c7303543"><span class="cl-ad8c9e99">3.4</span></p></td><td class="cl-32288b88"><p class="cl-c7303543"><span class="cl-ad8c9e99">3.4</span></p></td><td class="cl-32288b88"><p class="cl-c7303543"><span class="cl-ad8c9e99">3.6</span></p></td><td class="cl-32288b88"><p class="cl-c7303543"><span class="cl-ad8c9e99">3.7</span></p></td><td class="cl-32288b88"><p class="cl-c7303543"><span class="cl-ad8c9e99">3.9</span></p></td></tr></tbody></table></div>
+<p><em>Fuente: Elaboración propia con datos del INEC Panamá.</em></p>
+<p>La Figura 4 muestra gráficamente esta evolución. Las participaciones bioeconómicas en el VAB se mantienen en un rango acotado, pero el año 2020, marcado por la pandemia de COVID-19, muestra un comportamiento diferenciado: la participación de la bioeconomía directa en el VAB pasó de 4.1% en 2018 a 6.5% en 2020, mientras que la de la bioeconomía extendida cayó de 4.9% a 3.4%. Es decir, la bioeconomía directa resistió mejor la contracción que el resto de la economía, y la extendida, algo peor. A partir de 2021 ambas participaciones se acercan a sus niveles previos a la pandemia: en 2024 la bioeconomía directa aporta el 5.0% y la extendida el 3.9% del VAB. Estas participaciones se calculan con valores a precios corrientes, por lo que reflejan también la evolución de los precios relativos.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cb-panama_files/figure-html/figura-temporal-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div data-custom-style="Image Caption">
+<p><strong>Figura 4.</strong> Evolución de la participación bioeconómica en el VAB, Panamá 2018–2024</p>
+</div>
+</section>
+<section id="comparación-regional" class="level3">
+<h3 class="anchored" data-anchor-id="comparación-regional">Comparación regional</h3>
+<p>Los resultados obtenidos para Panamá pueden contextualizarse dentro del panorama regional. La Figura 5 presenta una comparación de la participación bioeconómica en el valor agregado bruto para trece países de América Latina y el Caribe, con base en los datos de <span class="citation" data-cites="vargas_cuentas_2023">Vargas et&nbsp;al. (<a href="#ref-vargas_cuentas_2023" role="doc-biblioref">2023</a>)</span> y los resultados del presente ejercicio.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cb-panama_files/figure-html/figura-regional-1.png" class="img-fluid figure-img" width="864"></p>
+</figure>
+</div>
+</div>
+</div>
+<div data-custom-style="Image Caption">
+<p><strong>Figura 5.</strong> Participación de la bioeconomía en el VAB de países seleccionados de América Latina y el Caribe (%)</p>
+</div>
+<p>Como se observa, Panamá se ubica en la parte inferior del rango regional en cuanto a participación bioeconómica en el VAB, resultado coherente con su estructura económica fuertemente orientada a los servicios. Los países centroamericanos con mayor peso del sector agropecuario, como Nicaragua, Honduras y Guatemala, presentan las mayores participaciones bioeconómicas. No obstante, esta comparación debe interpretarse con cautela, dado que una menor participación relativa no implica necesariamente un menor potencial de desarrollo bioeconómico, sino que refleja la composición sectorial de cada economía.</p>
+</section>
+</section>
+<section id="sec-conclusiones" class="level2">
+<h2 class="anchored" data-anchor-id="sec-conclusiones">Conclusiones y recomendaciones</h2>
+<p>El presente ejercicio de construcción de una cuenta satélite de bioeconomía para Panamá permite extraer varias conclusiones y plantear recomendaciones para el fortalecimiento de la medición y la política en esta materia.</p>
+<p>En primer lugar, los resultados confirman que la bioeconomía, si bien representa una proporción menor del PIB panameño en comparación con otros países de la región, constituye un componente relevante de la estructura productiva nacional. La bioeconomía directa y extendida, en conjunto, representan aproximadamente el 8.9% del valor agregado bruto, con una presencia concentrada en la agricultura, la industria alimentaria y las manufacturas basadas en recursos biológicos. Esta participación, aunque modesta en términos relativos, involucra sectores estratégicos para la seguridad alimentaria, el empleo rural y la diversificación productiva del país.</p>
+<p>En segundo lugar, la serie temporal 2018–2024 muestra que la participación bioeconómica se mantiene en un rango acotado, aunque con un comportamiento distinto entre categorías ante un choque como la pandemia de COVID-19: la bioeconomía directa aumentó su participación en el VAB en 2020, mientras que la extendida la redujo. Este hallazgo resulta relevante para la discusión sobre la resiliencia de los modelos productivos basados en la bioeconomía, aunque debe confirmarse con medidas encadenadas de valor, pues las cifras a precios corrientes incorporan efectos de precios.</p>
+<p>En tercer lugar, el análisis de las importaciones revela que una proporción significativa de los insumos bioeconómicos utilizados por la economía panameña proviene del exterior, lo que sugiere oportunidades para la sustitución de importaciones y el fortalecimiento de cadenas de valor nacionales basadas en recursos biológicos.</p>
+<p>Respecto a las limitaciones del presente ejercicio, es importante señalar que la ausencia de una Matriz de Insumo-Producto actualizada para Panamá restringe el alcance del análisis a la contribución directa de la bioeconomía. En el caso de Ecuador, la disponibilidad de una MIP permitió estimar multiplicadores de demanda y clasificar las actividades económicas según la intensidad de sus encadenamientos bioeconómicos, distinguiendo entre actividades con multiplicadores bioeconómicos muy altos, altos, sobre la mediana y bajo la mediana <span class="citation" data-cites="vargas_ecuador_2025">(<a href="#ref-vargas_ecuador_2025" role="doc-biblioref">Vargas, 2025</a>)</span>. Este tipo de análisis resulta particularmente valioso para la identificación de sectores con alto potencial de arrastre bioeconómico y para el diseño de políticas de fomento productivo.</p>
+<p>En este sentido, se recomienda que las autoridades estadísticas de Panamá prioricen la actualización de la Matriz de Insumo-Producto oficial, lo que permitiría:</p>
+<ol type="1">
+<li><p>Estimar la contribución indirecta de la bioeconomía, incluyendo los efectos de encadenamiento hacia atrás y hacia adelante a lo largo de las cadenas productivas.</p></li>
+<li><p>Calcular multiplicadores de demanda bioeconómica, identificando qué actividades generan los mayores efectos multiplicadores cuando aumenta la demanda de productos bioeconómicos <span class="citation" data-cites="miller_blair_2009 vargas_dietzenbacher_2015">(<a href="#ref-miller_blair_2009" role="doc-biblioref">Miller y Blair, 2009</a>; <a href="#ref-vargas_dietzenbacher_2015" role="doc-biblioref">Vargas y Dietzenbacher, 2015</a>)</span>.</p></li>
+<li><p>Profundizar el análisis de política, al disponer de herramientas cuantitativas que permitan simular escenarios de fomento de la bioeconomía y estimar sus impactos sobre la producción, el empleo y el comercio exterior.</p></li>
+</ol>
+<p>Adicionalmente, se recomienda:</p>
+<ul>
+<li><p>Actualización periódica de la cuenta satélite de bioeconomía, incorporando los nuevos años de COU conforme estén disponibles, para mantener un monitoreo continuo de la evolución del sector.</p></li>
+<li><p>Incorporación de los COU que muestran medidas encadenadas de valor, para determinar el crecimiento real de la bioeconomía.</p></li>
+<li><p>Vinculación con cuentas ambientales, siguiendo el marco del Sistema de Contabilidad Ambiental y Económica (SCAE) <span class="citation" data-cites="european_commission_system_2013">(<a href="#ref-european_commission_system_2013" role="doc-biblioref">European Commission et&nbsp;al., 2013</a>)</span>, lo que permitiría analizar la relación entre la bioeconomía y el uso de recursos naturales y servicios ecosistémicos.</p></li>
+<li><p>Desarrollo de una estrategia nacional de bioeconomía, que se apoye en la evidencia estadística generada por las cuentas satélite para establecer metas cuantificables y mecanismos de seguimiento, como han hecho otros países de la región.</p></li>
+</ul>
+</section>
+<section id="referencias" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="referencias">Referencias</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-comision_europea_scn_2016" class="csl-entry" role="listitem">
+Comisión Europea, Fondo Monetario Internacional, Organización de Cooperación y Desarrollo Económicos, Naciones Unidas y Banco Mundial. (2016). <em>Sistema de <span>Cuentas</span> <span>Nacionales</span> 2008</em>. Naciones Unidas.
+</div>
+<div id="ref-european_commission_system_2013" class="csl-entry" role="listitem">
+European Commission, Organisation for Economic Cooperation and Development, United Nations y World Bank. (2013). <em>System of <span>Environmental</span>-<span>Economic</span> <span>Accounting</span> 2012</em>. United Nations.
+</div>
+<div id="ref-german_bioeconomy_council_2018" class="csl-entry" role="listitem">
+German Bioeconomy Council. (2018). <em>Global <span>Bioeconomy</span> <span>Summit</span>: <span>Conference</span> <span>Report</span></em>. German Bioeconomy Council.
+</div>
+<div id="ref-iacgb_2018" class="csl-entry" role="listitem">
+IACGB. (2018). <em>Innovation in the <span>Global</span> <span>Bioeconomy</span> for <span>Sustainable</span> and <span>Inclusive</span> <span>Transformation</span> and <span>Wellbeing</span>: <span>Communiqué</span> of the <span>Global</span> <span>Bioeconomy</span> <span>Summit</span> 2018</em>. International Advisory Council on Global Bioeconomy.
+</div>
+<div id="ref-iacgb_2020" class="csl-entry" role="listitem">
+IACGB. (2020). <em>Expanding the <span>Sustainable</span> <span>Bioeconomy</span>: <span>Vision</span> and <span>Way</span> <span>Forward</span>: <span>Communiqué</span> of the <span>Global</span> <span>Bioeconomy</span> <span>Summit</span> 2020</em>. International Advisory Council on Global Bioeconomy.
+</div>
+<div id="ref-inec_panama_cou" class="csl-entry" role="listitem">
+INEC Panamá. (2024). <em>Cuadros de <span>Oferta</span> y <span>Utilización</span> del <span>Sistema</span> de <span>Cuentas</span> <span>Nacionales</span> de <span>Panamá</span></em>. Instituto Nacional de Estadística y Censo (INEC).
+</div>
+<div id="ref-miller_blair_2009" class="csl-entry" role="listitem">
+Miller, R. E. y Blair, P. D. (2009). <em>Input-<span>Output</span> <span>Analysis</span>: <span>Foundations</span> and <span>Extensions</span></em> (2.ª ed.). Cambridge University Press.
+</div>
+<div id="ref-rodriguez_bioeconomia_2017" class="csl-entry" role="listitem">
+Rodríguez, A., Mondaini, A. y Hitschfeld, M. (2017). <em>Bioeconomía en <span>América</span> <span>Latina</span> y el <span>Caribe</span>: contexto global y regional y perspectivas</em> (N.º 215; Serie <span>Desarrollo</span> <span>Productivo</span>). Comisión Económica para América Latina y el Caribe (CEPAL).
+</div>
+<div id="ref-vargas_ecuador_2025" class="csl-entry" role="listitem">
+Vargas, R. (2025). <em>Implementación de una metodología de construcción de cuentas satélite de bioeconomía con el <span>Sistema</span> de <span>Cuentas</span> <span>Nacionales</span> de <span>Ecuador</span></em>. Comisión Económica para América Latina y el Caribe (CEPAL).
+</div>
+<div id="ref-vargas_cuenta_2022" class="csl-entry" role="listitem">
+Vargas, R., Alvarado, I., Rodríguez, A., Rodríguez, M. y Wander, P. (2022). <em>Cuenta satélite de bioeconomía para <span>Costa</span> <span>Rica</span></em> (N.º 214; Serie <span>Recursos</span> <span>Naturales</span> y <span>Desarrollo</span>). Comisión Económica para América Latina y el Caribe (CEPAL).
+</div>
+<div id="ref-vargas_dietzenbacher_2015" class="csl-entry" role="listitem">
+Vargas, R. y Dietzenbacher, E. (2015). Economies to die for: <span>Impacts</span> on human health embodied in production and trade. <em>Economic Systems Research</em>.
+</div>
+<div id="ref-vargas_cuentas_2023" class="csl-entry" role="listitem">
+Vargas, R., Mondaini, A. y Rodríguez, A. (2023). <em>Cuentas satélite de bioeconomía para 13 países de <span>América</span> <span>Latina</span> y el <span>Caribe</span></em> (N.º 219; Serie <span>Recursos</span> <span>Naturales</span> y <span>Desarrollo</span>). Comisión Económica para América Latina y el Caribe (CEPAL).
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

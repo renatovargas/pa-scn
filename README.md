@@ -1,281 +1,43 @@
-# Curso práctico de procesamiento y exportación de Cuadros de Oferta y Utilización Bioeconómicos en R
+# Cuenta de Bioeconomía de Panamá
 
 ## Descripción general
 
-Este repositorio contiene los materiales y scripts utilizados en un curso práctico de aprendizaje por medio de la práctica (*aprender-haciendo*) enfocado en el procesamiento, transformación, análisis y exportación de Cuadros de Oferta y Utilización (COU) bioeconómicos utilizando R y el ecosistema tidyverse.
+Este repositorio contiene todo lo necesario para estimar la cuenta satélite de bioeconomía de Panamá a partir de los Cuadros de Oferta y Utilización (COU) del Sistema de Cuentas Nacionales (INEC). Parte de la Tabla plana oficial de cuadros complementarios (2018-2024), le agrega la clasificación bioeconómica de productos y actividades, y produce:
 
-El objetivo principal del curso es demostrar cómo transformar datos de cuentas nacionales originalmente estructurados para análisis estadístico en productos reproducibles, transparentes y visualmente publicables, manteniendo una lógica clara y fácil de enseñar.
+- una base de datos consolidada (`.RDS`, `.xlsx` y DuckDB),
+- el COU bioeconómico agregado en Excel, con una hoja por año,
+- y el documento final en Word (`documentos/cb-panama.qmd`).
 
-El flujo de trabajo cubre:
+Todos los productos salen de una sola fuente de verdad: `salidas/pan_scn_oficial.RDS`. Cifras en millones de balboas (B/.) a precios corrientes.
 
-- Introducción a R y estructuras básicas de datos.
-- Importación de datos desde múltiples formatos.
-- Introducción al ecosistema tidyverse.
-- Procesamiento de Cuadros de Oferta y Utilización.
-- Conversión de matrices a formato plano.
-- Agregar el tema bioeconómico a los datos.
-- Construcción de bases de datos económicas reproducibles.
-- Uso de funciones para automatizar procesos.
-- Análisis exploratorio de datos.
-- Exportación avanzada a Excel utilizando `openxlsx`.
-- Generación automatizada de cuadros institucionales multi-año.
+## Flujo de trabajo
 
-El repositorio busca equilibrar:
+Ejecutar siempre desde la raíz del proyecto, en este orden:
 
-- claridad pedagógica,
-- reproducibilidad,
-- automatización,
-- y generación de productos compatibles con los estándares de trabajo de bancos centrales, institutos nacionales de estadística y ministerios.
+| Paso | Script | Qué hace |
+|---|---|---|
+| 1 | `scripts/09a-crear-equivalencias-v03.R` | Construye `data/config/pan_v03_equivalencias.xlsx` (lookups de cuadrantes, transacciones, actividades, filas y columnas). Solo se repite si cambian los lookups. |
+| 2 | `scripts/09-procesamiento-tabla-oficial.R` | Procesa la Tabla plana: elimina sumas parciales y totales, deriva márgenes y ajuste CIF/FOB, completa los cuadros y guarda `salidas/pan_scn_oficial.*`. |
+| 3 | `scripts/10-validar-contra-cou-oficial.R` | Compara la base con los COU oficiales de `data/cou_oficial`, celda por celda y en agregados. |
+| 4 | `scripts/08-exportar-todo-con-funciones.R` | Genera `salidas/COU-BIO-agregado-2018-2024.xlsx`. |
+| 5 | `documentos/cb-panama.qmd` | Documento final. Renderizar a Word con `quarto render documentos/cb-panama.qmd --to docx --execute-dir ..` |
 
----
+Las funciones están en `scripts/00-funciones.R` (procesamiento y validación) y `scripts/00-funciones-exportar-Excel.R` (exportación a Excel). Los scripts `06` y `07` son de exploración y de exportación de un solo año.
 
-# Filosofía del curso
+## Estructura del repositorio
 
-Este curso busca enseñar procesamiento de información macroeconómica de forma práctica y aplicada para agregar el tema de la bioeconomía a las cuentas nacionales.
+- `data/config/`: configuración y equivalencias (clasificación bioeconómica, áreas transaccionales, condición de mercado).
+- `data/cou_flat/`: Tabla plana oficial (fuente de la base).
+- `data/cou_oficial/`: COU oficiales del INEC 2018-2024, usados para validar.
+- `documentos/`: documento Quarto, bibliografía y plantilla de Word.
+- `salidas/`: base de datos y Excel generados.
+- `scripts/`: código del proceso.
+- `AGENTS.md`: memoria de trabajo con las reglas y decisiones del proyecto.
 
-El énfasis no está únicamente en escribir código, sino en desarrollar:
+## Validación
 
-- estructuras reproducibles,
-- flujos transparentes,
-- productos compatibles con necesidades institucionales,
-- y herramientas mantenibles por equipos técnicos.
+La base coincide con los COU oficiales de 2022 a 2024 en todas las celdas. Para 2018-2021, la Tabla plana corresponde a una revisión distinta de la de los archivos de `data/cou_oficial`.
 
-El objetivo final es que las y los participantes puedan:
+## Material del curso
 
-- comprender completamente el flujo de transformación,
-- adaptar los scripts a sus propias necesidades,
-- automatizar procesos repetitivos,
-- y producir cuadros estadísticos de alta calidad de manera reproducible.
-
-# Estructura del repositorio
-
-## `data/`
-
-Contiene los datos utilizados durante el curso.
-
-### `data/config/`
-
-Archivos de configuración y equivalencias utilizados para interpretar filas y columnas de los COU.
-
-### `data/cou/`
-
-Archivos originales de Cuadros de Oferta y Utilización.
-
-### `data/ejemplo/`
-
-Datos simplificados utilizados para ejemplos y ejercicios prácticos.
-
-### `data/intro/`
-
-Archivos utilizados durante las sesiones introductorias del curso.
-
-Incluye ejemplos de:
-
-- CSV,
-- Excel,
-- SPSS,
-- STATA,
-- y datos geográficos.
-
----
-
-## `presentaciones/`
-
-Presentaciones del curso en formato Quarto (`.qmd`).
-
-Estas presentaciones acompañan las sesiones prácticas y explican:
-
-- conceptos económicos,
-- estructuras de datos,
-- tidyverse,
-- procesamiento matricial,
-- diseño de bases de datos,
-- y automatización de flujos de trabajo.
-
----
-
-## `salidas/`
-
-Contiene los productos generados por los scripts.
-
-Ejemplos:
-
-- archivos `.xlsx`,
-- archivos `.RDS`,
-- cuadros procesados,
-- y exportaciones finales.
-
----
-
-## `scripts/`
-
-Contiene los scripts principales del curso.
-
-Los scripts están organizados numéricamente para facilitar:
-
-- su ejecución secuencial,
-- su explicación en clase,
-- y el seguimiento progresivo de conceptos.
-
----
-
-# Qué se aprende con cada script
-
-## `01-instalar-paquetes.R`
-
-Introducción a la instalación y gestión básica de paquetes en R.
-
-### Conceptos principales
-
-- instalación de paquetes,
-- configuración básica del entorno,
-- paquetes fundamentales para análisis macroeconómico,
-- y preparación del entorno de trabajo.
-
----
-
-## `02-introduccion.R`
-
-Introducción a R y estructuras básicas de datos.
-
-### Conceptos principales
-
-- objetos,
-- vectores,
-- matrices,
-- data frames,
-- índices,
-- funciones,
-- concatenación de cadenas,
-- y lógica básica de programación.
-
----
-
-## `03-datos-y-tidyverse.R`
-
-Introducción a importación de datos y tidyverse.
-
-### Conceptos principales
-
-- lectura de CSV y Excel,
-- importación de SPSS y STATA,
-- lectura de datos geográficos,
-- visualización simple de mapas,
-- uso de `dplyr`,
-- uso de `tidyr`,
-- uso de `stringr`,
-- y flujos de trabajo con tuberías (`|>`).
-
----
-
-## `04-procesamiento-simple.R`
-
-Procesamiento manual de un Cuadro de Oferta y Utilización sin utilizar funciones.
-
-### Conceptos principales
-
-- lectura de matrices económicas,
-- creación de identificadores estables,
-- limpieza de datos,
-- conversión de matrices a formato largo,
-- uso de `pivot_longer()`,
-- uniones con tablas de equivalencias,
-- y exportación básica a Excel.
-
----
-
-## `05-procesamiento-con-funciones.R`
-
-Procesamiento automatizado de COU utilizando funciones reutilizables.
-
-### Conceptos principales
-
-- modularización del código,
-- automatización iterativa,
-- procesamiento multi-cuadrante,
-- manejo de configuraciones,
-- uso de listas,
-- y construcción de bases de datos consolidadas.
-
----
-
-## `06-analisis-exploratorio.R`
-
-Análisis exploratorio de datos utilizando la base procesada.
-
-### Conceptos principales
-
-- filtrado de información económica,
-- agregación de datos,
-- cálculo de porcentajes,
-- generación de tablas,
-- uso de `gt`,
-- gráficos con `ggplot2`,
-- y análisis de relaciones bioeconómicas.
-
----
-
-## `07-exportar-cous-Excel.R`
-
-Construcción y exportación de un cuadro bioeconómico agregado a Excel.
-
-### Conceptos principales
-
-- uso de `pivot_wider()`,
-- construcción de encabezados jerárquicos,
-- generación de matrices económicas,
-- estilos avanzados con `openxlsx`,
-- bordes jerárquicos,
-- agrupaciones visuales,
-- subtotales,
-- y diseño institucional de cuadros estadísticos.
-
----
-
-## `08-exportar-todo-con-funciones.R`
-
-Automatización multi-año de la exportación de cuadros bioeconómicos.
-
-### Conceptos principales
-
-- iteración sobre múltiples años,
-- generación dinámica de hojas de Excel,
-- reutilización de funciones,
-- automatización de exportaciones,
-- y construcción de productos reproducibles multi-año.
-
----
-
-# Scripts de funciones
-
-## `00-funciones.R`
-
-Contiene funciones auxiliares utilizadas para el procesamiento de datos.
-
-### Conceptos principales
-
-- separación entre lógica y ejecución,
-- reutilización de código,
-- funciones parametrizadas,
-- procesamiento de cuadrantes,
-- lectura de configuraciones,
-- y construcción de flujos reproducibles.
-
----
-
-## `00-funciones-exportar-Excel.R`
-
-Contiene funciones dedicadas a la exportación y formateo avanzado de cuadros en Excel.
-
-### Conceptos principales
-
-- encapsulamiento de lógica de exportación,
-- automatización de estilos,
-- generación de cuadros institucionales,
-- manejo avanzado de `openxlsx`,
-- formatos jerárquicos,
-- subtotales automáticos,
-- exportación multi-hoja,
-- y construcción de productos listos para publicación.
-
-
+El repositorio incluye además material de un curso práctico de procesamiento de COU en R con tidyverse: los scripts didácticos `01` a `05` (que usan `data/cou`, `data/intro` y `data/ejemplo`) y las presentaciones Quarto en `presentaciones/`.

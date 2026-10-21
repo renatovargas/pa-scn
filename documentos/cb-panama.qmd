@@ -68,6 +68,26 @@ estatus_ref <- df |>
 
 bio_levels <- c("Bioeconomía", "Bioeconomía extendida", "No bioeconomía")
 
+# Filas del COU sin clasificación bioeconómica (no son productos): el ajuste
+# CIF/FOB y las compras directas en el exterior y en el territorio. Se
+# muestran como renglones propios en los cuadros para que los totales
+# coincidan con el COU oficial.
+cat_cif <- "Ajuste CIF/FOB"
+cat_compras <- "Compras directas (exterior y territorio)"
+niveles_cat <- c(bio_levels, cat_cif, cat_compras)
+
+df <- df |>
+  mutate(
+    `Clasificación Bioeconomía Productos` = case_when(
+      !is.na(`Clasificación Bioeconomía Productos`) ~
+        `Clasificación Bioeconomía Productos`,
+      `Áreas Transaccionales Filas No.` == "ATF03" ~ cat_cif,
+      `Áreas Transaccionales Filas No.` %in%
+        c("ATF04a", "ATF04b", "ATF05a", "ATF05b") ~ cat_compras,
+      TRUE ~ NA_character_
+    )
+  )
+
 bio_colores <- c(
   "Bioeconomía" = "#2E8B57",
   "Bioeconomía extendida" = "#87CEEB",
@@ -81,13 +101,15 @@ fmt_num <- function(x) {
 # Tabla para el documento (flextable). Los números se formatean antes de
 # imprimir. La fila cuya primera columna dice "Total" va en negrita.
 # `ancho` es el ancho útil de la página en pulgadas (carta vertical con
-# márgenes de 1" = 6.5).
+# márgenes de 0.75" = 7). `rotar_encabezado` gira a 90 grados los
+# encabezados de las columnas numéricas (útil con nombres largos).
 mostrar_tabla <- function(
   datos,
   decimales = 1,
   etiquetas = names(datos),
-  ancho = 6.5,
-  tamano = 9
+  ancho = 7,
+  tamano = 9,
+  rotar_encabezado = FALSE
 ) {
   decimales <- rlang::set_names(
     rep(decimales[1], ncol(datos)),
@@ -129,7 +151,18 @@ mostrar_tabla <- function(
   # de la página, sin reducir el tamaño de la letra
   ft <- autofit(ft)
   anchos <- dim(ft)$widths
-  width(ft, width = anchos / sum(anchos) * ancho)
+  if (rotar_encabezado) {
+    ft <- ft |>
+      rotate(j = -1, rotation = "btlr", align = "bottom", part = "header") |>
+      align(j = -1, align = "left", part = "header") |>
+      height(height = 1.25, part = "header") |>
+      hrule(rule = "atleast", part = "header")
+    n <- ncol(datos)
+    primera <- 1.8
+    width(ft, width = c(primera, rep((ancho - primera) / (n - 1), n - 1)))
+  } else {
+    width(ft, width = anchos / sum(anchos) * ancho)
+  }
 }
 
 # Títulos y referencias de tablas. Quarto 1.10 genera para las tablas de Word
@@ -207,7 +240,7 @@ fmt1 <- function(x) formatC(x, format = "f", digits = 1, decimal.mark = ".")
 cifras_texto <- df |>
   filter(
     `Área transaccional columnas No.` == "ATC01",
-    `Clasificación Bioeconomía Productos` %in% bio_levels
+    `Clasificación Bioeconomía Productos` %in% niveles_cat
   ) |>
   summarize(
     valor = sum(value, na.rm = TRUE),
@@ -324,7 +357,7 @@ oferta_prod <- df |>
     year == anio_ref,
     tabla_destino == "01 Oferta",
     `Área transaccional columnas No.` == "ATC01",
-    `Clasificación Bioeconomía Productos` %in% bio_levels,
+    `Clasificación Bioeconomía Productos` %in% niveles_cat,
     !is.na(`CIIU Secciones`),
     `CIIU Secciones` != "-"
   ) |>
@@ -338,7 +371,7 @@ oferta_otros <- df |>
     tabla_destino == "01 Oferta",
     `Área transaccional columnas No.` != "ATC01" |
       is.na(`Área transaccional columnas No.`),
-    `Clasificación Bioeconomía Productos` %in% bio_levels
+    `Clasificación Bioeconomía Productos` %in% niveles_cat
   ) |>
   group_by(`Clasificación Bioeconomía Productos`, `Transacciones Agregadas`) |>
   summarize(valor = sum(value, na.rm = TRUE), .groups = "drop") |>
@@ -365,7 +398,7 @@ oferta_wide <- bind_rows(oferta_prod, oferta_otros) |>
   mutate(
     `Clasificación Bioeconomía Productos` = factor(
       `Clasificación Bioeconomía Productos`,
-      levels = bio_levels
+      levels = niveles_cat
     )
   ) |>
   arrange(`Clasificación Bioeconomía Productos`)
@@ -385,6 +418,7 @@ agregar_total <- function(tabla) {
 }
 
 oferta_tabla1 <- oferta_wide |>
+  filter(`Clasificación Bioeconomía Productos` %in% bio_levels) |>
   select(`Clasificación Bioeconomía Productos`, all_of(cols_produccion)) |>
   mutate(Total = rowSums(across(all_of(cols_produccion)))) |>
   agregar_total()
@@ -408,7 +442,7 @@ titulo_tabla("oferta", paste0("Valor bruto de producción por categoría bioecon
 
 oferta_tabla1 |>
   rename(` ` = `Clasificación Bioeconomía Productos`) |>
-  mostrar_tabla()
+  mostrar_tabla(rotar_encabezado = TRUE)
 ```
 
 *Fuente: Elaboración propia con datos del INEC Panamá.*
@@ -444,7 +478,7 @@ ci_data <- df |>
     year == anio_ref,
     tabla_destino == "02 Utilización",
     `Área transaccional columnas No.` == "ATC01",
-    `Clasificación Bioeconomía Productos` %in% bio_levels,
+    `Clasificación Bioeconomía Productos` %in% niveles_cat,
     !is.na(`CIIU Secciones`),
     `CIIU Secciones` != "-"
   ) |>
@@ -457,7 +491,7 @@ ci_wide <- ci_data |>
   mutate(
     `Clasificación Bioeconomía Productos` = factor(
       `Clasificación Bioeconomía Productos`,
-      levels = bio_levels
+      levels = niveles_cat
     )
   ) |>
   arrange(`Clasificación Bioeconomía Productos`)
@@ -484,7 +518,7 @@ demanda_tabla <- df |>
     year == anio_ref,
     tabla_destino == "02 Utilización",
     `Área transaccional columnas No.` != "ATC01",
-    `Clasificación Bioeconomía Productos` %in% bio_levels
+    `Clasificación Bioeconomía Productos` %in% niveles_cat
   ) |>
   mutate(destino = destinos[as.character(`Código Transacciones`)]) |>
   summarize(
@@ -501,7 +535,7 @@ demanda_tabla <- df |>
   mutate(
     `Clasificación Bioeconomía Productos` = factor(
       `Clasificación Bioeconomía Productos`,
-      levels = bio_levels
+      levels = niveles_cat
     )
   ) |>
   arrange(`Clasificación Bioeconomía Productos`) |>
@@ -521,10 +555,14 @@ demanda_tabla <- df |>
 # Control: la utilización total debe ser igual a la oferta total
 stopifnot(
   isTRUE(all.equal(
-    demanda_tabla$`Utilización total`,
-    oferta_tabla2$`Oferta total`
+    demanda_tabla$`Utilización total`[demanda_tabla[[1]] == "Total"],
+    oferta_tabla2$`Oferta total`[oferta_tabla2[[1]] == "Total"]
   ))
 )
+
+# El ajuste CIF/FOB solo tiene valores en el cuadro de oferta
+ci_tabla <- filter(ci_tabla, `Clasificación Bioeconomía Productos` != cat_cif)
+demanda_tabla <- filter(demanda_tabla, `Clasificación Bioeconomía Productos` != cat_cif)
 
 # Participaciones sobre la utilización total, para el texto
 pct_uso <- demanda_tabla |>
@@ -546,7 +584,7 @@ titulo_tabla("utilizacion", paste0("Consumo intermedio por categoría bioeconóm
 
 ci_tabla |>
   rename(` ` = `Clasificación Bioeconomía Productos`) |>
-  mostrar_tabla()
+  mostrar_tabla(rotar_encabezado = TRUE)
 ```
 
 *Fuente: Elaboración propia con datos del INEC Panamá.*
@@ -593,7 +631,7 @@ produccion <- df |>
     year == anio_ref,
     tabla_destino == "01 Oferta",
     `Área transaccional columnas No.` == "ATC01",
-    `Clasificación Bioeconomía Productos` %in% bio_levels
+    `Clasificación Bioeconomía Productos` %in% niveles_cat
   ) |>
   group_by(`Clasificación Bioeconomía Productos`) |>
   summarize(Producción = sum(value, na.rm = TRUE), .groups = "drop")
@@ -603,7 +641,7 @@ consumo_int <- df |>
     year == anio_ref,
     tabla_destino == "02 Utilización",
     `Área transaccional columnas No.` == "ATC01",
-    `Clasificación Bioeconomía Productos` %in% bio_levels
+    `Clasificación Bioeconomía Productos` %in% niveles_cat
   ) |>
   group_by(`Clasificación Bioeconomía Productos`) |>
   summarize(CI = sum(value, na.rm = TRUE), .groups = "drop")
@@ -614,7 +652,7 @@ vab <- produccion |>
     VAB = Producción - CI,
     `Clasificación Bioeconomía Productos` = factor(
       `Clasificación Bioeconomía Productos`,
-      levels = bio_levels
+      levels = niveles_cat
     )
   ) |>
   arrange(`Clasificación Bioeconomía Productos`)
@@ -635,6 +673,7 @@ vab_tabla <- bind_rows(vab, totals_vab) |>
   )
 
 vab_tabla |>
+  filter(`Clasificación Bioeconomía Productos` != cat_cif) |>
   rename(` ` = `Clasificación Bioeconomía Productos`) |>
   mostrar_tabla(
     decimales = 1,
@@ -777,7 +816,7 @@ El `r fmt1(manuf_pct["Bioeconomía", "pct"])`% de la producción de las industri
 titulo_tabla("manufactura", paste0("Actividades manufactureras con mayor producción de bioeconomía directa, Panamá ", anio_ref, " (millones de B/.)"))
 
 manuf_tabla |>
-  mostrar_tabla(decimales = 1, ancho = 6.5)
+  mostrar_tabla(decimales = 1)
 ```
 
 *Fuente: Elaboración propia con datos del INEC Panamá.*
@@ -961,7 +1000,7 @@ ts_prod <- df |>
   filter(
     tabla_destino == "01 Oferta",
     `Área transaccional columnas No.` == "ATC01",
-    `Clasificación Bioeconomía Productos` %in% bio_levels
+    `Clasificación Bioeconomía Productos` %in% niveles_cat
   ) |>
   group_by(year, `Clasificación Bioeconomía Productos`) |>
   summarize(valor = sum(value, na.rm = TRUE), .groups = "drop") |>
@@ -980,7 +1019,7 @@ ts_ci <- df |>
   filter(
     tabla_destino == "02 Utilización",
     `Área transaccional columnas No.` == "ATC01",
-    `Clasificación Bioeconomía Productos` %in% bio_levels
+    `Clasificación Bioeconomía Productos` %in% niveles_cat
   ) |>
   group_by(year, `Clasificación Bioeconomía Productos`) |>
   summarize(valor = sum(value, na.rm = TRUE), .groups = "drop") |>
@@ -996,7 +1035,7 @@ ts_ci <- df |>
 ts_vab <- df |>
   filter(
     `Área transaccional columnas No.` == "ATC01",
-    `Clasificación Bioeconomía Productos` %in% bio_levels
+    `Clasificación Bioeconomía Productos` %in% niveles_cat
   ) |>
   group_by(year, tabla_destino, `Clasificación Bioeconomía Productos`) |>
   summarize(valor = sum(value, na.rm = TRUE), .groups = "drop") |>
@@ -1039,7 +1078,7 @@ La `r ref_figura("temporal")` muestra gráficamente esta evolución. Las partici
 ts_vab_plot <- df |>
   filter(
     `Área transaccional columnas No.` == "ATC01",
-    `Clasificación Bioeconomía Productos` %in% bio_levels
+    `Clasificación Bioeconomía Productos` %in% niveles_cat
   ) |>
   group_by(year, tabla_destino, `Clasificación Bioeconomía Productos`) |>
   summarize(valor = sum(value, na.rm = TRUE), .groups = "drop") |>
@@ -1048,7 +1087,7 @@ ts_vab_plot <- df |>
   group_by(year) |>
   mutate(pct = VAB / sum(VAB) * 100) |>
   ungroup() |>
-  filter(`Clasificación Bioeconomía Productos` != "No bioeconomía") |>
+  filter(`Clasificación Bioeconomía Productos` %in% c("Bioeconomía", "Bioeconomía extendida")) |>
   mutate(
     bio = factor(
       `Clasificación Bioeconomía Productos`,
